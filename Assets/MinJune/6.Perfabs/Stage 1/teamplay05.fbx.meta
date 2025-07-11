@@ -1,0 +1,327 @@
+fileFormatVersion: 2
+guid: a3894c51524019c41993208188939cad
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DONG
+    second: {fileID: 2100000, guid: 9ca0852879c2ec542a5cc25a35e74cd2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DONG_H
+    second: {fileID: 2100000, guid: 2b05e1435ca033647829ce47b2e95240, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: chang
+    second: {fileID: 2100000, guid: 03ffadc4d70aba548918d45008681a4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: door
+    second: {fileID: 2100000, guid: cb1b20810e80c48448859161889dbe1d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gidoong
+    second: {fileID: 2100000, guid: 09630fec63ceb8941b60b730bcfbad33, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: git
+    second: {fileID: 2100000, guid: d4a2db2618eb6dd45a7d2dc9dbfb8969, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: room
+    second: {fileID: 2100000, guid: 8bccfc0bb0745b54f91b74e4e22d453c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: window
+    second: {fileID: 2100000, guid: 0d5c2373361ff6245adf1e7f247483ae, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: chang_BaseColor
+    second: {fileID: 2800000, guid: 9d8a639de00dc264e9e411b8a4f61868, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: chang_Metallic
+    second: {fileID: 2800000, guid: 37e9254d4c4beb545908824b72966bd7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: chang_Normal
+    second: {fileID: 2800000, guid: 64552763173f1a94c98a6c0d58ae44d2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: chang_Roughness
+    second: {fileID: 2800000, guid: 8afa349620f5b5a429c8c515bee2d155, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dongdong_BaseColor
+    second: {fileID: 2800000, guid: 94cad37644a427344a68768883bd418b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dongdong_Metallic
+    second: {fileID: 2800000, guid: f4c904cb454d30749bcf90592fef0f83, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dongdong_Normal
+    second: {fileID: 2800000, guid: 2ea8f63f0458e8a46bc3afd08545be09, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dongdong_Roughness
+    second: {fileID: 2800000, guid: daa4c1193aeeaf44892d7fef473b3f95, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dongheadMaterial_BaseColor
+    second: {fileID: 2800000, guid: abc077820a34894428ab06421ff983c2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dongheadMaterial_Metallic
+    second: {fileID: 2800000, guid: fec6ddb641602fb40933df04ace5b8ac, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dongheadMaterial_Normal
+    second: {fileID: 2800000, guid: 9bf76ca3fa6825a4f9409576dd047492, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: dongheadMaterial_Roughness
+    second: {fileID: 2800000, guid: db4a7c74593e21844b14bacef541c8f0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: door_Alpha
+    second: {fileID: 2800000, guid: 7b42f26d01bc19341802d536f03aa7fb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: door_BaseColor
+    second: {fileID: 2800000, guid: 5d1f43499b764da4695c171134b85da9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: door_Metallic
+    second: {fileID: 2800000, guid: 4839e934b55111841b7c8d997234d47d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: door_Normal
+    second: {fileID: 2800000, guid: ceed494340fdf114792814dba2590abf, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: door_Roughness
+    second: {fileID: 2800000, guid: 3879926ed98443d4e9d0063767f8d62d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: gidoong_BaseColor
+    second: {fileID: 2800000, guid: ca5da72496fbeda4e976437c29a64ff8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: gidoong_Metallic
+    second: {fileID: 2800000, guid: a149ba9edd4e8ba4480af7b94f2507cc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: gidoong_Normal
+    second: {fileID: 2800000, guid: ff0b5fc9933434d4c8cff423f8f88505, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: gidoong_Roughness
+    second: {fileID: 2800000, guid: 59293f195b012b043b0aa0b693c8369b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: git_Alpha
+    second: {fileID: 2800000, guid: 42e1f31206933f14b9e45b7a3c007ad3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: git_BaseColor
+    second: {fileID: 2800000, guid: ba56e59fa669143419c54502f0791151, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: git_Metallic
+    second: {fileID: 2800000, guid: 32ac6ad30e30a034a83329a5e0e83498, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: git_Normal
+    second: {fileID: 2800000, guid: daf0b6e724a08e84db17112f352d1885, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: git_Roughness
+    second: {fileID: 2800000, guid: 3a5d2588dc03893469dd616d47adac2d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: room_Alpha
+    second: {fileID: 2800000, guid: 719c7d7dbe8e04d418e58261491542e8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: room_BaseColor
+    second: {fileID: 2800000, guid: 988e7b54917cacd469a2d4c393d472b4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: room_Metallic
+    second: {fileID: 2800000, guid: 871fc61351de1eb42bd182e2bfbcc450, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: room_Normal
+    second: {fileID: 2800000, guid: 5461f19e647ad8f4ea98ba25c0b67ec6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: room_Roughness
+    second: {fileID: 2800000, guid: c0e3a3649d664dd499f2477ad99e2764, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: window_Alpha
+    second: {fileID: 2800000, guid: a806ef56780e8b54b82da282ee5ed216, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: window_BaseColor
+    second: {fileID: 2800000, guid: 7cea489564161494e8a23a2e5be24390, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: window_Metallic
+    second: {fileID: 2800000, guid: c4d983ced7dd174479da0b9e8a61ec07, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: window_Normal
+    second: {fileID: 2800000, guid: fd6316ea90a66df449219c24617eb9d8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: window_Roughness
+    second: {fileID: 2800000, guid: b593c35f33da2a44ea719b9e5d878fbf, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
