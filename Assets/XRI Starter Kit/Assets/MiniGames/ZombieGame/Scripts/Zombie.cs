@@ -9,7 +9,7 @@ namespace MikeNspired.XRIStarterKit
     public class Zombie : MonoBehaviour, IEnemy
     {
         #region Fields
-
+        
         [Header("Health & Effects")] [Tooltip("Enemy health component.")] [SerializeField]
         private EnemyHealth enemyHealth;
 
@@ -249,7 +249,7 @@ namespace MikeNspired.XRIStarterKit
         public void Die()
         {
             if (isDead) return;
-
+            
             isDead = true;
             OnZombieDied?.Invoke(this);
 

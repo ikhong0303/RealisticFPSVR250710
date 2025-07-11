@@ -2,8 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.XR.CoreUtils;
+using MikeNspired.XRIStarterKit;
 
-public class VRPlayerController : MonoBehaviour
+    public class VRPlayerController : MonoBehaviour
 {
     public int hp = 100;
     public int attackPower = 2;
@@ -83,3 +84,4 @@ public class VRPlayerController : MonoBehaviour
     }
 
 }
+    
