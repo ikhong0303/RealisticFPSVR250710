@@ -8,3 +8,4 @@ GitHub Desktop으로 프로젝트 Clone
 Unity에서 개발 (Scene, Script 등)
 작업 완료 후 Commit, Push origin으로 저장소에 반영
 Scene 파일 충돌 방지를 위해 한 명씩 번갈아 작업합니다.
+^^
