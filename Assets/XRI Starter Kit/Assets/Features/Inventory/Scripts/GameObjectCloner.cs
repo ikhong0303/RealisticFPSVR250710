@@ -12,6 +12,7 @@ namespace MikeNspired.XRIStarterKit
         public static GameObject DuplicateAndStrip(GameObject original)
         {
             if (original == null) return null;
+
             var originalParent = original.transform.parent;
 
             original.transform.parent = null;
@@ -33,9 +34,10 @@ namespace MikeNspired.XRIStarterKit
                 DestroyOutlineMaterials(mr);
 
                 Material[] currentMats = mr.sharedMaterials;
-                List<Material> validMats = currentMats.Where(t => t).ToList();
+                List<Material> validMats = currentMats.Where(t => t != null).ToList();
 
-                if (validMats.Count != currentMats.Length) mr.materials = validMats.ToArray();
+                if (validMats.Count != currentMats.Length)
+                    mr.materials = validMats.ToArray();
             }
         }
 
@@ -43,38 +45,38 @@ namespace MikeNspired.XRIStarterKit
         {
             var materials = r.materials;
             for (int i = 0; i < materials.Length; i++)
-                if (materials[i].name.Contains("Outline"))
+            {
+                if (materials[i] != null && materials[i].name.Contains("Outline"))
+                {
                     Object.DestroyImmediate(materials[i]);
+                }
+            }
         }
 
         private static void StripNonVisualComponents(Transform root)
         {
-            // Remove components in safe order (To prevent errors from [RequiredComponent("")]
             RemoveDependentComponents<OnGrabEnableDisable>(root);
             RemoveDependentComponents<XRGrabInteractable>(root);
             RemoveDependentComponents<XRBaseInteractable>(root);
-            RemoveDependentComponents<ColorMaterialPropertyAffordanceReceiver>(root);
             RemoveDependentComponents<GraphicRaycaster>(root);
             RemoveDependentComponents<Image>(root);
             RemoveDependentComponents<CanvasScaler>(root);
 
-            // Remove physics components
             RemoveComponents<Rigidbody>(root);
             RemoveComponents<Collider>(root);
 
-            // Remove all other non-visual components
             var components = root.GetComponentsInChildren<Component>(true);
-            foreach (Component component in components)
+            foreach (var component in components)
             {
                 if (component == null) continue;
                 if (ShouldPreserve(component)) continue;
+
                 Object.DestroyImmediate(component);
             }
         }
 
         private static bool ShouldPreserve(Component component)
         {
-            // Preserve essential visual components and enabled renderers
             if (component is Transform || component is MeshFilter)
                 return true;
 
@@ -87,13 +89,19 @@ namespace MikeNspired.XRIStarterKit
         private static void RemoveDependentComponents<T>(Transform root) where T : Component
         {
             foreach (var component in root.GetComponentsInChildren<T>(true))
-                Object.DestroyImmediate(component);
+            {
+                if (component != null)
+                    Object.DestroyImmediate(component);
+            }
         }
 
         private static void RemoveComponents<T>(Transform root) where T : Component
         {
             foreach (var component in root.GetComponentsInChildren<T>(true))
-                Object.DestroyImmediate(component);
+            {
+                if (component != null)
+                    Object.DestroyImmediate(component);
+            }
         }
     }
 }
