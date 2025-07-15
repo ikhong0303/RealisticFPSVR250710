@@ -10,7 +10,8 @@ namespace MikeNspired.XRIStarterKit
         patrol,
         chase,
         death,
-        damage
+        damage,
+        attack
     }
 
     public class NpcController : MonoBehaviour, IEnemy

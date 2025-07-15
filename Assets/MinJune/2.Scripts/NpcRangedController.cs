@@ -5,9 +5,6 @@ using Unity.XR.CoreUtils;
 
 namespace MikeNspired.XRIStarterKit
 {
-    /// <summary>
-    /// 원거리 공격 전용 NPC 컨트롤러
-    /// </summary>
     public class NpcRangedController : MonoBehaviour, IEnemy
     {
         [Header("NPC 상태")]
@@ -22,7 +19,6 @@ namespace MikeNspired.XRIStarterKit
         public float fieldOfViewAngle = 100f;
 
         [Header("원거리 공격 컴포넌트")]
-        [Tooltip("RangeAttack 컴포넌트를 할당하거나, 자동으로 GetComponent 합니다.")]
         public RangeAttack rangeAttack;
 
         [Header("죽음 후 Dissolve 지연시간")]
@@ -33,6 +29,8 @@ namespace MikeNspired.XRIStarterKit
         private Transform playerCamera;
         private EnemyHealth enemyHealth;
         private DissolveEffect dissolveEffect;
+
+        private bool isAttacking = false;
 
         private void Awake()
         {
@@ -73,15 +71,18 @@ namespace MikeNspired.XRIStarterKit
 
             if (distance < searchDistance && angle < fieldOfViewAngle * 0.5f && !blocked)
             {
-                //if (npcMode != NpcMode.attack) 이거 문제!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    //npcMode = NpcMode.attack;
-                AttackBehavior();
+                if (npcMode != NpcMode.attack)
+                {
+                    npcMode = NpcMode.attack;
+                    AttackBehavior();
+                }
             }
             else
             {
                 if (npcMode != NpcMode.patrol)
                     npcMode = NpcMode.patrol;
                 PatrolMove();
+                isAttacking = false;
             }
         }
 
@@ -94,15 +95,20 @@ namespace MikeNspired.XRIStarterKit
 
         private void AttackBehavior()
         {
+            if (isAttacking) return;
+
             nav.ResetPath();
             FaceTarget(playerCamera.position);
-
-            // 공격 애니메이션만 재생, 데미지는 RangeAttack/ParticleDamage로 처리
             anim.SetTrigger("attack");
+            isAttacking = true;
+        }
 
-            // RangeAttack이 독립적으로 파티클 발사 및 데미지 로직을 수행
-            //if (rangeAttack != null && !rangeAttack.IsOnCooldown) 얘도 문제!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                //rangeAttack.TriggerFire();
+        public void OnAttackAnimationEnd()
+        {
+            isAttacking = false;
+
+            if (rangeAttack != null && !rangeAttack.IsOnCooldown)
+                rangeAttack.TriggerFire();
         }
 
         private void FaceTarget(Vector3 target)
