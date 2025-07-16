@@ -1,0 +1,287 @@
+fileFormatVersion: 2
+guid: 77e789cd1aa16d146be4cf4fee94e9a3
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Arm
+    second: {fileID: 2100000, guid: b0d05569b87d4a948b7421a6ff20c5f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bone
+    second: {fileID: 2100000, guid: 57709ca368a7e5748a32dfb5047c908d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chest
+    second: {fileID: 2100000, guid: 7061cc9a0d2476145b05de1b96b2d1a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Foot
+    second: {fileID: 2100000, guid: 95400af11026b3f48a4c35b88dc4ed24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hat
+    second: {fileID: 2100000, guid: 2a3191e7d1f90844da867a7b8d2e83fa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Head
+    second: {fileID: 2100000, guid: 9ea1974890bc68b489d51361d0ba9cb7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leg
+    second: {fileID: 2100000, guid: 21349d0cccdbbad418ec80220f84057d, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.001_BaseColor
+    second: {fileID: 2800000, guid: 008b2c077954661488e42a5c8484ebea, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.001_Metallic
+    second: {fileID: 2800000, guid: 0fbc0d7d1f5dbb041a43b3bb93dbf7d7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.001_Normal
+    second: {fileID: 2800000, guid: cda363e1f63c1bc41ae64f4253a1d2ee, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.001_Roughness
+    second: {fileID: 2800000, guid: bf46ec54438eded459953131a79881e9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.002_BaseColor
+    second: {fileID: 2800000, guid: 190126cf3df074649aa8d051ac9e677a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.002_Metallic
+    second: {fileID: 2800000, guid: aa874dcd0610b2d42ae92089b64df703, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.002_Normal
+    second: {fileID: 2800000, guid: 6f5f62eb34463694fab9ea9ac29f926c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.002_Roughness
+    second: {fileID: 2800000, guid: a3f41a299dfb27f4881151f973b950b0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.003_BaseColor
+    second: {fileID: 2800000, guid: 0e94f6771e865f348a2c0baf885bd0d7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.003_Metallic
+    second: {fileID: 2800000, guid: 51192df404d942b4faea813870ab5478, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.003_Normal
+    second: {fileID: 2800000, guid: b3532b33a0dd33546b96abc6b9985ded, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.003_Roughness
+    second: {fileID: 2800000, guid: fe3f196d61935dc4e802de81936331d3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.004_BaseColor
+    second: {fileID: 2800000, guid: dc629abd9832b2d4ea24c60625b65929, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.004_Metallic
+    second: {fileID: 2800000, guid: 0fc84c0e206581d43b21e8ad27890fb1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.004_Normal
+    second: {fileID: 2800000, guid: 8531e9530c00c8e49b53536a9c7e4879, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.004_Roughness
+    second: {fileID: 2800000, guid: 28d721388fa4bf94989fe9f726eadd83, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.005_BaseColor
+    second: {fileID: 2800000, guid: 7aee98facfa254648b4206d017c5c114, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.005_Emission
+    second: {fileID: 2800000, guid: b5960930ec50e3f4e9684251a089bfa8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.005_Metallic
+    second: {fileID: 2800000, guid: 7589fa63dcec6e04ca2ef6a8391ddf1b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.005_Normal
+    second: {fileID: 2800000, guid: b0e4ec91ee5999344b482ee378e5139f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.005_Roughness
+    second: {fileID: 2800000, guid: bc42392960db5c1498d4fdee62d10e6a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.014_BaseColor
+    second: {fileID: 2800000, guid: a9abcd21363f91a4f91e9403b0b816b4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.014_Metallic
+    second: {fileID: 2800000, guid: f4f12856ee2a5704cb02d1ce72d0c051, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.014_Normal
+    second: {fileID: 2800000, guid: 24637d577b9e06e42b5f67bf7b91c947, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor.014_Roughness
+    second: {fileID: 2800000, guid: 477eaf4ccf7fbc24cbbe748b18261bea, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor_BaseColor
+    second: {fileID: 2800000, guid: 3e45a9ccf06aedc4b9c544bbd5ef0167, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor_Metallic
+    second: {fileID: 2800000, guid: c03737bd450207f4596a0020d8ac8949, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor_Normal
+    second: {fileID: 2800000, guid: 4b2a564da803a0946a39cd54222b3e44, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Armor_Roughness
+    second: {fileID: 2800000, guid: cc5be61ee2f7b5d43a15defd4e62005a, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
