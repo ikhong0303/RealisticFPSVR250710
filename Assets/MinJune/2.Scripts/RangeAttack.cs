@@ -76,8 +76,7 @@ public class RangeAttack : MonoBehaviour
 
         if (Quaternion.Angle(transform.rotation, targetRot) <= fireAngleThreshold)
         {
-            // 자동 발사 제거
-            // 이제 TriggerFire()로만 발사
+            TriggerFire();
         }
     }
 
@@ -96,9 +95,7 @@ public class RangeAttack : MonoBehaviour
         Vector3 spawnPos = firePoint.position;
         Quaternion spawnRot = firePoint.rotation;
 
-        // ────────────────────────────────
-        // (1) ParticleDamageOnCollision 방식
-        // ────────────────────────────────
+        // 파티클 생성
         var psInstance = Instantiate(particlePrefab, spawnPos, spawnRot);
 
         var col = psInstance.collision;
@@ -114,33 +111,9 @@ public class RangeAttack : MonoBehaviour
 
         psInstance.Play();
 
-        // ────────────────────────────────
-        // (2) ParticleDamage 방식 (Trigger Collider)
-        // ────────────────────────────────
-        // 트리거 Collider 사용하려면 아래 주석 해제
-        /*
-        var go = new GameObject("ParticleDamageCollider");
-        go.transform.position = spawnPos;
-        go.transform.rotation = spawnRot;
-        var collider = go.AddComponent<SphereCollider>();
-        collider.isTrigger = true;
-        collider.radius = 1.0f; // 원하는 범위로 조정
-        var pd = go.AddComponent<ParticleDamage>();
-        pd.damage = damageAmount;
-        pd.delayBeforeNextFire = damageInterval;
-        */
-
         yield return new WaitForSeconds(particleDuration);
         psInstance.Stop();
         Destroy(psInstance.gameObject, psInstance.main.startLifetime.constantMax);
-
-        // Trigger Collider 제거
-        /*
-        if (go != null)
-        {
-            Destroy(go);
-        }
-        */
 
         yield return new WaitForSeconds(fireCooldown);
         isCoolingDown = false;
