@@ -3,19 +3,26 @@ using System.Collections;
 
 public class RangeAttack : MonoBehaviour
 {
+    public enum FireMode
+    {
+        Single,  // 한 지점에서 발사 (레이저)
+        Multi    // 여러 지점에서 동시에 발사 (머신건)
+    }
+
     [Header("추적 대상 설정")]
     public Transform trackingTarget;
 
-    [Header("발사 범위 설정")]
-    public float fireRange = 10f;
-
-    [Header("추적 설정")]
-    public float rotationSpeed = 5f;
-    public float fireAngleThreshold = 5f;
+    [Header("발사 타입 설정")]
+    public FireMode fireMode = FireMode.Single;
 
     [Header("발사 지점 설정")]
-    public Transform firePoint;
+    public Transform[] firePoints;
     public bool useFallbackToSelf = true;
+
+    [Header("조건 설정")]
+    public float fireRange = 10f;
+    public float rotationSpeed = 5f;
+    public float fireAngleThreshold = 5f;
 
     [Header("파티클 설정")]
     public ParticleSystem particlePrefab;
@@ -35,16 +42,14 @@ public class RangeAttack : MonoBehaviour
     void Start()
     {
         if (trackingTarget != null)
-        {
             currentTarget = trackingTarget;
-        }
         else
         {
             var headObj = GameObject.FindWithTag("MainCamera");
             if (headObj != null)
                 currentTarget = headObj.transform;
             else
-                Debug.LogWarning("추적 대상이 설정되지 않았고, MainCamera도 찾을 수 없습니다.");
+                Debug.LogWarning("MainCamera를 찾을 수 없습니다.");
         }
 
         if (currentTarget != null)
@@ -54,8 +59,9 @@ public class RangeAttack : MonoBehaviour
                 Debug.LogWarning("VRPlayerController를 찾을 수 없습니다.");
         }
 
-        if (firePoint == null && useFallbackToSelf)
-            firePoint = this.transform;
+        // fallback
+        if ((firePoints == null || firePoints.Length == 0) && useFallbackToSelf)
+            firePoints = new Transform[] { this.transform };
     }
 
     void Update()
@@ -75,28 +81,37 @@ public class RangeAttack : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, Time.deltaTime * rotationSpeed);
 
         if (Quaternion.Angle(transform.rotation, targetRot) <= fireAngleThreshold)
-        {
             TriggerFire();
-        }
     }
 
     internal void TriggerFire()
     {
-        if (isCoolingDown)
-            return;
-
-        StartCoroutine(FireRoutine());
+        if (!isCoolingDown)
+            StartCoroutine(FireRoutine());
     }
 
     private IEnumerator FireRoutine()
     {
         isCoolingDown = true;
 
-        Vector3 spawnPos = firePoint.position;
-        Quaternion spawnRot = firePoint.rotation;
+        if (fireMode == FireMode.Single)
+        {
+            Transform firePoint = firePoints[0];
+            FireParticle(firePoint);
+        }
+        else if (fireMode == FireMode.Multi)
+        {
+            foreach (Transform fp in firePoints)
+                FireParticle(fp);
+        }
 
-        // 파티클 생성
-        var psInstance = Instantiate(particlePrefab, spawnPos, spawnRot);
+        yield return new WaitForSeconds(particleDuration + fireCooldown);
+        isCoolingDown = false;
+    }
+
+    private void FireParticle(Transform firePoint)
+    {
+        var psInstance = Instantiate(particlePrefab, firePoint.position, firePoint.rotation);
 
         var col = psInstance.collision;
         col.enabled = true;
@@ -110,12 +125,6 @@ public class RangeAttack : MonoBehaviour
         dmgHandler.playerController = playerController;
 
         psInstance.Play();
-
-        yield return new WaitForSeconds(particleDuration);
-        psInstance.Stop();
-        Destroy(psInstance.gameObject, psInstance.main.startLifetime.constantMax);
-
-        yield return new WaitForSeconds(fireCooldown);
-        isCoolingDown = false;
+        Destroy(psInstance.gameObject, particleDuration + psInstance.main.startLifetime.constantMax);
     }
 }

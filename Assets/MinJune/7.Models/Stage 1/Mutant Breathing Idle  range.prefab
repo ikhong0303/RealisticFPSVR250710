@@ -110,6 +110,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a2c356fac65d5a428bb3989f2632f37, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8953526364335814510}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a2c356fac65d5a428bb3989f2632f37, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8483445956870319096}
     - targetCorrespondingSourceObject: {fileID: -203856693384778745, guid: 5a2c356fac65d5a428bb3989f2632f37, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4001268504862762655}
@@ -239,6 +242,19 @@ MonoBehaviour:
   fieldOfViewAngle: 5
   rangeAttack: {fileID: 0}
   deathEffectDelay: 2
+--- !u!114 &8483445956870319096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4761775800050518068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93256ab782ea0184b9ec98d82bdd6a67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 5
 --- !u!4 &6296591689351350957 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 5a2c356fac65d5a428bb3989f2632f37, type: 3}
