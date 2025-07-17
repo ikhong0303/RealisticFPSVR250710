@@ -1,262 +1,170 @@
-﻿// Author MikeNspired.
+﻿// ProjectileWeapon.cs (Audio null-check 적용된 소총용 스크립트)
+// 작성자: MikeNspired
+// 이 스크립트는 VR 환경에서 소총 발사, 무제한 탄약, 발사 딜레이, 반동 및 햅틱 기능을 구현합니다.
 
-using System;
 using System.Collections;
-
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
-using static Unity.Mathematics.math; // For "remap" or other math utility
 
 namespace MikeNspired.XRIStarterKit
 {
+    /// <summary>
+    /// VR용 소총 스크립트
+    /// - 무제한 탄약 지원
+    /// - 연속 발사 딜레이
+    /// - 반동 및 햅틱 피드백
+    /// </summary>
     public class ProjectileWeapon : MonoBehaviour
     {
-        [Header("Required Refs")]
-        [SerializeField] private Transform firePoint;
-        [SerializeField] private Rigidbody projectilePrefab;
-        [SerializeField] private ParticleSystem cartridgeEjection;
-        [SerializeField] private AudioSource fireAudio;
-        [SerializeField] private AudioSource outOfAmmoAudio;
-        [SerializeField] private MatchTransform bulletFlash;
-        [SerializeField] private GunCocking gunCocking;
+        [Header("발사 설정")]
+        [SerializeField] private Transform firePoint;              // 총알 발사 위치
+        [SerializeField] private Rigidbody projectilePrefab;       // 발사체 프리팹
+        [SerializeField] private AudioSource fireAudio;            // 발사 사운드 (Inspector에서 할당 필요)
+        [SerializeField] private float bulletSpeed = 150f;         // 발사 속도
+        [SerializeField] private float fireDelay = 0.2f;           // 연속 발사 간 딜레이 (초)
 
-        [Header("Settings")]
-        public MagazineAttachPoint magazineAttach = null;
-        public float recoilAmount = -0.03f;
-        public float recoilRotation = 1;
-        public float recoilTime = 0.06f;
-        public int bulletsPerShot = 1;
-        public float bulletSpreadAngle = 1;
-        public float bulletSpeed = 150;
-        public bool infiniteAmmo = false;
-        public float hapticDuration = 0.1f;
-        public float hapticStrength = 0.5f;
+        [Header("반동 및 햅틱")]
+        [SerializeField] public float recoilAmount = -0.03f;      // 밀림 거리
+        [SerializeField] public float recoilRotation = 1f;        // 회전 반동 각도
+        [SerializeField] private float recoilTime = 0.06f;         // 반동 지속 시간 (초)
+        [SerializeField] private float hapticStrength = 0.5f;      // 햅틱 강도
+        [SerializeField] private float hapticDuration = 0.1f;      // 햅틱 지속 시간 (초)
 
-        [Header("Auto-Fire")]
-        public float fireSpeed = 0.25f;
-        public bool automaticFiring = false;
-
+        // 내부 상태
         private XRGrabInteractable interactable;
         private XRBaseInteractor controller;
-        private Collider[] gunColliders;
-        private bool gunCocked, isFiring;
-        private float fireTimer;
+        private Transform recoilTracker;
+        private float nextFireTime = 0f;
+        private bool isRecoiling = false;
+        private float recoilTimer = 0f;
+        private Vector3 recoilStartPos, recoilEndPos;
+        private Quaternion recoilStartRot, recoilEndRot;
+        private Vector3 controllerOffset;
 
-        // Events
-        public UnityEvent BulletFiredEvent, OutOfAmmoEvent, FiredLastBulletEvent;
+        // 총알 발사 이벤트
+        public UnityEvent BulletFiredEvent;
 
-        void Awake()
+        private void Awake()
         {
-            OnValidate();
-
-            interactable.activated.AddListener(_ => TryFire(true));
-            interactable.deactivated.AddListener(_ => TryFire(false));
-            interactable.selectEntered.AddListener(SetupRecoilVariables);
-            interactable.selectExited.AddListener(DestroyRecoilTracker);
-
-            if (gunCocking)
-                gunCocking.GunCockedEvent.AddListener(() => gunCocked = true);
+            interactable = GetComponent<XRGrabInteractable>();
+            // Activate 이벤트에 발사 로직 연결
+            interactable.activated.AddListener(_ => FireGun());
+            // Grab/Release 시 반동 트래커 생성/파괴
+            interactable.selectEntered.AddListener(OnGrab);
+            interactable.selectExited.AddListener(OnRelease);
         }
 
-        void OnValidate()
-        {
-            if (!gunCocking) gunCocking = GetComponentInChildren<GunCocking>();
-            if (!interactable) interactable = GetComponent<XRGrabInteractable>();
-        }
-
-        // Expression-bodied for simple subscribe/unsubscribe
-        void OnEnable() => Application.onBeforeRender += RecoilUpdate;
-        void OnDisable() => Application.onBeforeRender -= RecoilUpdate;
-
-        void Update()
-        {
-            if (!automaticFiring) return;
-
-            // Fire continuously if trigger is held
-            if (isFiring && fireTimer >= fireSpeed)
-            {
-                FireGun();
-                fireTimer = 0f;
-            }
-            fireTimer += Time.deltaTime;
-        }
-
-        private void TryFire(bool state)
-        {
-            isFiring = state;
-            // If not automatic, fire immediately once
-            if (state && !automaticFiring) FireGun();
-        }
-
-        
+        /// <summary>
+        /// FireGun: 발사 메서드
+        /// - fireDelay로 연속 발사 제한
+        /// - 총알 인스턴스 생성 → 힘 적용
+        /// - 사운드 및 햅틱 → 이벤트 호출 → 반동 시작
+        /// </summary>
         public void FireGun()
         {
-            // Prevent firing with no bullets per shot
-            if (bulletsPerShot < 1) return;
+            if (Time.time < nextFireTime)
+                return; // 딜레이 중엔 발사 무시
 
-            // Check if we have ammo, or if the gun is cocked
-            if (magazineAttach && !infiniteAmmo && (CheckIfGunCocked() || !magazineAttach.Magazine || !magazineAttach.Magazine.UseAmmo()))
+            nextFireTime = Time.time + fireDelay;
+
+            // 총알 생성 및 발사
+            Rigidbody bullet = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            bullet.AddForce(firePoint.forward * bulletSpeed, ForceMode.VelocityChange);
+
+            // 발사 사운드 (fireAudio가 할당되어 있고 clip이 존재할 때만 재생)
+            if (fireAudio != null && fireAudio.clip != null)
+                fireAudio.PlayOneShot(fireAudio.clip);
+
+            // 햅틱 피드백
+            if (controller)
             {
-                OutOfAmmoEvent.Invoke();
-                outOfAmmoAudio.PlayOneShot(outOfAmmoAudio.clip);
-                gunCocked = false;
-                return;
+                var haptic = controller.GetComponentInParent<HapticImpulsePlayer>();
+                haptic?.SendHapticImpulse(hapticStrength, hapticDuration);
             }
 
-            // If there's a GunCocking script, ensure it’s cocked
-            if (gunCocking && !gunCocked)
-            {
-                OutOfAmmoEvent.Invoke();
-                outOfAmmoAudio.PlayOneShot(outOfAmmoAudio.clip);
-                return;
-            }
+            // 외부 확장용 이벤트
+            BulletFiredEvent?.Invoke();
 
-            // Fire multiple projectiles if bulletsPerShot > 1
-            for (int i = 0; i < bulletsPerShot; i++)
-            {
-                Vector3 shotDirection = Vector3.Slerp(
-                    firePoint.forward,
-                    UnityEngine.Random.insideUnitSphere,
-                    bulletSpreadAngle / 180f
-                );
-
-                var bullet = Instantiate(projectilePrefab);
-                IgnoreColliders(bullet);
-
-                // Set bullet position/rotation and launch
-                bullet.transform.SetPositionAndRotation(
-                    firePoint.position, Quaternion.LookRotation(shotDirection)
-                );
-                bullet.AddForce(bullet.transform.forward * bulletSpeed, ForceMode.VelocityChange);
-
-                // Simple haptic
-                controller.GetComponentInParent<HapticImpulsePlayer>().SendHapticImpulse(hapticStrength, hapticDuration);
-
-                BulletFiredEvent.Invoke();
-
-                // Stop recoil coroutines (if any) and start new recoil
-                StopAllCoroutines();
-                StartRecoil();
-            }
-
-            // If we just fired the last bullet in the mag
-            if (magazineAttach && magazineAttach.Magazine && magazineAttach.Magazine.CurrentAmmo == 0)
-                FiredLastBulletEvent.Invoke();
-
-            // Optional muzzle flash
-            if (bulletFlash)
-            {
-                var flash = Instantiate(bulletFlash);
-                flash.transform.position = firePoint.position;
-                flash.positionToMatch = firePoint; // Follow the barrel
-            }
-
-            // Audio + Particle
-            fireAudio?.PlayOneShot(fireAudio.clip);
-            if(cartridgeEjection)
-                cartridgeEjection.Play();
+            // 반동 시작
+            StartRecoil();
         }
 
-        private void IgnoreColliders(Component bullet)
-        {
-            gunColliders = GetComponentsInChildren<Collider>(true);
-            var bulletCollider = bullet.GetComponentInChildren<Collider>();
-            foreach (var c in gunColliders) Physics.IgnoreCollision(c, bulletCollider);
-        }
-
-        // Single-line expression method
-        private bool CheckIfGunCocked() => gunCocking && !gunCocked;
-
-        #region Recoil
-
-        private Transform recoilTracker;
-        private Quaternion startingRotation;
-        private Vector3 endOfRecoilPosition;
-        private Quaternion endOfRecoilRotation;
-        private float timer;
-        private bool isRecoiling;
-        private Vector3 controllerToAttachDelta;
-
-        private void SetupRecoilVariables(SelectEnterEventArgs args)
+        private void OnGrab(SelectEnterEventArgs args)
         {
             controller = args.interactorObject as XRBaseInteractor;
-            StartCoroutine(SetupRecoil(interactable.attachEaseInTime));
+            StartCoroutine(SetupRecoilTracker());
         }
 
-        private void DestroyRecoilTracker(SelectExitEventArgs args)
+        private void OnRelease(SelectExitEventArgs args)
         {
             StopAllCoroutines();
             if (recoilTracker) Destroy(recoilTracker.gameObject);
             isRecoiling = false;
         }
 
-        private IEnumerator SetupRecoil(float interactableAttachEaseInTime)
+        /// <summary>
+        /// 반동 트래커 생성
+        /// </summary>
+        private IEnumerator SetupRecoilTracker()
         {
-            // Quick check for a HandReference script
-            var handReference = controller.GetComponentInParent<HandReference>();
-            if (!handReference) yield break;
-
-            recoilTracker = new GameObject($"{name} Recoil Tracker").transform;
+            if (controller == null) yield break;
+            recoilTracker = new GameObject("RecoilTracker").transform;
             recoilTracker.parent = controller.attachTransform;
-
-            // Optionally wait for the attach time to finish
             yield return null;
         }
 
+        /// <summary>
+        /// StartRecoil: 반동 시작 시 위치/회전 목표 계산
+        /// </summary>
         private void StartRecoil()
         {
-            // If there's no recoil tracker yet, create it
-            if (!recoilTracker) StartCoroutine(SetupRecoil(1));
+            if (!recoilTracker)
+                StartCoroutine(SetupRecoilTracker());
 
-            recoilTracker.localRotation = startingRotation;
-            recoilTracker.localPosition = Vector3.zero;
-            startingRotation = transform.localRotation;
+            recoilStartPos = recoilTracker.localPosition;
+            recoilStartRot = recoilTracker.localRotation;
 
-            timer = 0f;
-            controllerToAttachDelta = transform.position - recoilTracker.position;
+            recoilEndPos = recoilStartPos + recoilTracker.forward * recoilAmount;
+            recoilEndRot = recoilStartRot * Quaternion.Euler(-recoilRotation, 0, 0);
+
+            controllerOffset = transform.position - recoilTracker.position;
+            recoilTimer = 0f;
             isRecoiling = true;
         }
 
-        [BeforeRenderOrder(101)]
+        private void OnEnable() => Application.onBeforeRender += RecoilUpdate;
+        private void OnDisable() => Application.onBeforeRender -= RecoilUpdate;
+
+        /// <summary>
+        /// RecoilUpdate: 렌더 직전 반동 보정
+        /// </summary>
+        [UnityEngine.BeforeRenderOrder(101)]
         private void RecoilUpdate()
         {
             if (!isRecoiling) return;
 
-            if (timer < recoilTime / 2f)
+            float half = recoilTime / 2f;
+            if (recoilTimer < half)
             {
-                // Move & rotate the gun backward for recoil
-                if (Math.Abs(recoilAmount) > 0.001f)
-                {
-                    recoilTracker.position += transform.forward * recoilAmount * Time.deltaTime;
-                    transform.position = recoilTracker.position + controllerToAttachDelta;
-                }
-
-                if (Math.Abs(recoilRotation) > 0.001f)
-                    transform.Rotate(Vector3.right, -recoilRotation * Time.deltaTime, Space.Self);
-
-                endOfRecoilPosition = recoilTracker.localPosition;
-                endOfRecoilRotation = transform.localRotation;
+                float t = recoilTimer / half;
+                recoilTracker.localPosition = Vector3.Lerp(recoilStartPos, recoilEndPos, t);
+                recoilTracker.localRotation = Quaternion.Slerp(recoilStartRot, recoilEndRot, t);
             }
             else
             {
-                // Return gun back to original position/rotation
-                float t = remap(recoilTime / 2f, recoilTime, 0f, 1f, timer);
-                recoilTracker.localPosition = Vector3.Lerp(endOfRecoilPosition, Vector3.zero, t);
-                var newRotation = Quaternion.Lerp(endOfRecoilRotation, startingRotation, t);
-
-                transform.position = recoilTracker.position + controllerToAttachDelta;
-                transform.localRotation = newRotation;
+                float t = (recoilTimer - half) / half;
+                recoilTracker.localPosition = Vector3.Lerp(recoilEndPos, Vector3.zero, t);
+                recoilTracker.localRotation = Quaternion.Slerp(recoilEndRot, Quaternion.identity, t);
+                transform.position = recoilTracker.position + controllerOffset;
             }
 
-            timer += Time.deltaTime;
-            if (timer > recoilTime)
+            recoilTimer += Time.deltaTime;
+            if (recoilTimer >= recoilTime)
                 isRecoiling = false;
         }
-
-        #endregion
     }
 }

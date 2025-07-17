@@ -13,40 +13,23 @@ namespace MikeNspired.XRIStarterKit
 
         void Awake()
         {
-            if (!inventorySlot)
-                inventorySlot = GetComponent<InventorySlot>();
+            inventorySlot = inventorySlot ?? GetComponent<InventorySlot>();
             inventorySlot.onSlotUpdated += CheckTypes;
         }
 
         private void CheckTypes(XRBaseInteractable currentSlotItem)
         {
-            if (!currentSlotItem) return;
+            if (!currentSlotItem)
+            {
+                HideText();
+                return;
+            }
 
-            var projectile = currentSlotItem.GetComponent<ProjectileWeapon>();
-            if (projectile)
-                CheckAmmo(projectile);
+            // ProjectileWeapon이면 무조건 ∞ 표시
+            if (currentSlotItem.GetComponent<ProjectileWeapon>() != null)
+                SetTextToInfinity();
             else
                 HideText();
-        }
-
-        private void CheckAmmo(ProjectileWeapon projectile)
-        {
-            if (!projectile.magazineAttach)
-            {
-                SetTextToInfinity();
-            }
-            else
-            {
-                Magazine magazine = projectile.magazineAttach.Magazine;
-                if (magazine)
-                    SetText(magazine.CurrentAmmo.ToString(), magazine.MaxAmmo.ToString());
-            }
-        }
-
-        private void SetText(string currentValue, string maxValue)
-        {
-            currentCount.text = currentValue;
-            maxCount.text = "/" + maxValue;
         }
 
         private void HideText()

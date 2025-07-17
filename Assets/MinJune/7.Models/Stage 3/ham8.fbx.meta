@@ -1,0 +1,287 @@
+fileFormatVersion: 2
+guid: 7f21f940df3bf7443931f936ca55f7ff
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door
+    second: {fileID: 2100000, guid: dcad7eabd57292246af56b355272125c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lighting
+    second: {fileID: 2100000, guid: cc01fe26be50dc14ebcf9626651853f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plane
+    second: {fileID: 2100000, guid: 1466717ff92d41a45b68e6e7dc78e13c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window1
+    second: {fileID: 2100000, guid: 5536c26fcfa3b4149ae7ab57fdbdfc97, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: barrel2
+    second: {fileID: 2100000, guid: 46a86e3d2c5aa00429ae2b89f8b747c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: barrel3
+    second: {fileID: 2100000, guid: 807a9e46da475f24599f7f5fa692b9e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cogwheel
+    second: {fileID: 2100000, guid: 80d64cbe11f20514ca01d401862deeaf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: plumbing
+    second: {fileID: 2100000, guid: be33c4453460f324798bc93d12da191d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: room
+    second: {fileID: 2100000, guid: f3950dd7648618b468d3d0653b5e5472, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_Door_AlbedoTransparency
+    second: {fileID: 2800000, guid: f2b33020e07c009448296fe93d5ed2ed, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_Door_MetallicSmoothness
+    second: {fileID: 2800000, guid: fae6e5e760584e6478617033b441f12d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_Door_Normal
+    second: {fileID: 2800000, guid: 8ed99cfaf527dce4d8765c5733351736, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_Lighting_AlbedoTransparency
+    second: {fileID: 2800000, guid: 5eac4a3965397d14686cb8ab6b3f1a90, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_Lighting_MetallicSmoothness
+    second: {fileID: 2800000, guid: 431f5382745a6054dadb87d247bcb639, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_Lighting_Normal
+    second: {fileID: 2800000, guid: ae7ed94aeb49c5a4e84e4d0adc65c47c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_Plane_AlbedoTransparency
+    second: {fileID: 2800000, guid: b023447837de274458e7335731b8ea48, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_Plane_MetallicSmoothness
+    second: {fileID: 2800000, guid: 534d5d8bfffb2ca4caa57020cdbcd1ee, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_Plane_Normal
+    second: {fileID: 2800000, guid: 4de9210a46b689d42b872d07418d9662, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_Window1_AlbedoTransparency
+    second: {fileID: 2800000, guid: 34842363a127a4f49a7a237664cbaf86, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_Window1_MetallicSmoothness
+    second: {fileID: 2800000, guid: 5666a14a7b02c7a4eab0d8cd637f902f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_Window1_Normal
+    second: {fileID: 2800000, guid: 3be304baa1cf72a4fa0a867e1d057eb1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_barrel2_AlbedoTransparency
+    second: {fileID: 2800000, guid: f1ddb4108dda28a4a9d9e59dbb6ec13b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_barrel2_MetallicSmoothness
+    second: {fileID: 2800000, guid: 4cb39efd85105374e9bd8969cb9ecd92, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_barrel2_Normal
+    second: {fileID: 2800000, guid: dcd5c85d6dbcfec49b98f005c44520c8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_barrel3_AlbedoTransparency
+    second: {fileID: 2800000, guid: 7936fae338607b14ab64b2c02a4bb9b5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_barrel3_MetallicSmoothness
+    second: {fileID: 2800000, guid: 48b4c37fc149c7e4ebb1ca2275061211, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_barrel3_Normal
+    second: {fileID: 2800000, guid: 660e1acdf87156344a6fd5db72744fdc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_cogwheel_AlbedoTransparency
+    second: {fileID: 2800000, guid: ecdad9d9681ed434682ce771cb332c10, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_cogwheel_MetallicSmoothness
+    second: {fileID: 2800000, guid: 86ead650b4336b0468e63e893618ea29, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_cogwheel_Normal
+    second: {fileID: 2800000, guid: e73352a6392ad2d429e42c0d718aed9c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_plumbing_AlbedoTransparency
+    second: {fileID: 2800000, guid: 82ac73cc821f24d4a9c8ff691a67263e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_plumbing_MetallicSmoothness
+    second: {fileID: 2800000, guid: 2fc8131c644ece34392e29d11f0b9bce, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_plumbing_Normal
+    second: {fileID: 2800000, guid: c3131022374052644b1f4cfc83a26f02, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_room_AlbedoTransparency
+    second: {fileID: 2800000, guid: 8f9ede84f89ac3a4187d118363c7f165, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_room_MetallicSmoothness
+    second: {fileID: 2800000, guid: 43a69647f77158e4bae25ef46afb747a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ham1_room_Normal
+    second: {fileID: 2800000, guid: 56468aa1c87c3fb4092e14fa5b10c9b1, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
