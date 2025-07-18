@@ -26,20 +26,24 @@ public class DissolveEffect : MonoBehaviour
 
     IEnumerator DissolveFx()
     {
-        float t = disolveTime;
-        while (true)
+        float t = 0f; // 0부터 시작해서 1까지 증가
+        while (t < disolveTime)
         {
-            t -= Time.deltaTime;
+            t += Time.deltaTime;
+            float amount = Mathf.Clamp01(t / disolveTime); // 0~1 사이 값 보장
+
             foreach (var mat in mats)
             {
-                mat.SetFloat("_dissolvePower", t / disolveTime);
-                if (t <= 0)
-                {
-                    mat.SetFloat("_dissolvePower", 0);
-                    break;
-                }
+                mat.SetFloat("_DissolveAmount", amount);
             }
+
             yield return null;
+        }
+
+        // 최종적으로 정확히 1로 설정 (오차 보정)
+        foreach (var mat in mats)
+        {
+            mat.SetFloat("_DissolveAmount", 1f);
         }
     }
 }
