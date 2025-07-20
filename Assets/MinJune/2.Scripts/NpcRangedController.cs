@@ -38,6 +38,7 @@ namespace MikeNspired.XRIStarterKit
             anim = GetComponentInChildren<Animator>();
             enemyHealth = GetComponent<EnemyHealth>();
             dissolveEffect = GetComponentInChildren<DissolveEffect>();
+
             if (rangeAttack == null)
                 rangeAttack = GetComponent<RangeAttack>();
         }
@@ -49,11 +50,13 @@ namespace MikeNspired.XRIStarterKit
                 playerCamera = origin.Camera.transform;
 
             if (enemyHealth != null)
+            {
                 enemyHealth.OnTakeDamage += _ =>
                 {
                     if (npcMode != NpcMode.death && Random.value <= 0.1f)
                         anim.SetTrigger("damage");
                 };
+            }
         }
 
         private void Update()
@@ -65,9 +68,10 @@ namespace MikeNspired.XRIStarterKit
             Vector3 dir = (playerCamera.position - transform.position).normalized;
             dir.y = 0;
             float angle = Vector3.Angle(transform.forward, dir);
+
             bool blocked = Physics.Linecast(transform.position + Vector3.up,
-                                           playerCamera.position,
-                                           out RaycastHit hit) && !hit.collider.CompareTag("Player");
+                                            playerCamera.position,
+                                            out RaycastHit hit) && !hit.collider.CompareTag("Player");
 
             if (distance < searchDistance && angle < fieldOfViewAngle * 0.5f && !blocked)
             {
@@ -81,6 +85,7 @@ namespace MikeNspired.XRIStarterKit
             {
                 if (npcMode != NpcMode.patrol)
                     npcMode = NpcMode.patrol;
+
                 PatrolMove();
                 isAttacking = false;
             }
@@ -89,6 +94,8 @@ namespace MikeNspired.XRIStarterKit
         private void PatrolMove()
         {
             nav.speed = patrolSpeed;
+            nav.isStopped = false;
+
             if (!nav.hasPath && RandomPoint(transform.position, 10f, out Vector3 nextPoint))
                 nav.SetDestination(nextPoint);
         }
@@ -98,14 +105,17 @@ namespace MikeNspired.XRIStarterKit
             if (isAttacking) return;
 
             nav.ResetPath();
+            nav.isStopped = true; // 공격 중 이동 멈춤
             FaceTarget(playerCamera.position);
             anim.SetTrigger("attack");
             isAttacking = true;
         }
 
+        // 애니메이션 이벤트로 연결 필수
         public void OnAttackAnimationEnd()
         {
             isAttacking = false;
+            nav.isStopped = false; // 공격 종료 후 다시 이동 허용
 
             if (rangeAttack != null && !rangeAttack.IsOnCooldown)
                 rangeAttack.TriggerFire();
@@ -129,6 +139,7 @@ namespace MikeNspired.XRIStarterKit
             if (npcMode == NpcMode.death) return;
             npcMode = NpcMode.death;
             nav.ResetPath();
+            nav.isStopped = true;
             anim.SetTrigger("death");
             StartCoroutine(DeathRoutine());
         }
