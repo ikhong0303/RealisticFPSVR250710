@@ -3778,27 +3778,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 5
---- !u!114 &402344243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402344229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de71b29f1247de14eb505bd2440e40f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireMode: 0
-  firePoints:
-  - {fileID: 1119833453}
-  useFallbackToSelf: 1
-  particlePrefab: {fileID: 6594598162411061089, guid: 71566f03b4aa13349993562ab81cdf12, type: 3}
-  particleDuration: 2
-  fireCooldown: 5
-  damageAmount: 10
-  damageInterval: 1
 --- !u!64 &418712374
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6297,13 +6276,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2210656621927501891, guid: e20b133f867ad2345b5d07b8ce72b58d, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 1119833453}
+    - target: {fileID: 2210656621927501891, guid: e20b133f867ad2345b5d07b8ce72b58d, type: 3}
       propertyPath: patrolSpeed
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2210656621927501891, guid: e20b133f867ad2345b5d07b8ce72b58d, type: 3}
       propertyPath: npcRangeAttack
       value: 
-      objectReference: {fileID: 402344243}
+      objectReference: {fileID: 0}
+    - target: {fileID: 2210656621927501891, guid: e20b133f867ad2345b5d07b8ce72b58d, type: 3}
+      propertyPath: particlePrefab
+      value: 
+      objectReference: {fileID: 7619600479367008576, guid: 008e9e32692f45a4ab727b8f16b721a8, type: 3}
     - target: {fileID: 2210656621927501891, guid: e20b133f867ad2345b5d07b8ce72b58d, type: 3}
       propertyPath: searchDistance
       value: 25
@@ -6371,9 +6358,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4594833425985972189, guid: e20b133f867ad2345b5d07b8ce72b58d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 402344236}
-    - targetCorrespondingSourceObject: {fileID: 4594833425985972189, guid: e20b133f867ad2345b5d07b8ce72b58d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 402344243}
   m_SourcePrefab: {fileID: 100100000, guid: e20b133f867ad2345b5d07b8ce72b58d, type: 3}
 --- !u!64 &1030916979
 MeshCollider:
@@ -6822,7 +6806,7 @@ Transform:
   m_GameObject: {fileID: 1119833452}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -0.014, y: 0.291, z: 0}
+  m_LocalPosition: {x: -0.104, y: 0.149, z: -0.033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,68 +1,68 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 
 public class NpcRangeAttack : MonoBehaviour
 {
     public enum FireMode
     {
-        Single,  // ÇÑ ÁöÁ¡¿¡¼­ ¹ß»ç (·¹ÀÌÀú)
-        Multi    // ¿©·¯ ÁöÁ¡¿¡¼­ µ¿½Ã¿¡ ¹ß»ç (¸Ó½Å°Ç)
+        Single,  // í•œ ì§€ì ì—ì„œ ë°œì‚¬ (ë ˆì´ì €)
+        Multi    // ì—¬ëŸ¬ ì§€ì ì—ì„œ ë™ì‹œì— ë°œì‚¬ (ë¨¸ì‹ ê±´)
     }
 
-    [Header("¹ß»ç Å¸ÀÔ ¼³Á¤")]
+    [Header("ë°œì‚¬ íƒ€ì… ì„¤ì •")]
     public FireMode fireMode = FireMode.Single;
 
-    [Header("¹ß»ç ÁöÁ¡ ¼³Á¤")]
+    [Header("ë°œì‚¬ ì§€ì  ì„¤ì •")]
     public Transform[] firePoints;
     public bool useFallbackToSelf = true;
 
-    [Header("ÆÄÆ¼Å¬ ¼³Á¤")]
+    [Header("íŒŒí‹°í´ ì„¤ì •")]
     public ParticleSystem particlePrefab;
     public float particleDuration = 2f;
-    public float fireCooldown = 5f; // ÀÌ Äğ´Ù¿îÀº NpcRangedController¿¡¼­ °ø°İ ÁÖ±â¸¦ Á¦¾îÇÒ ¶§ »ç¿ëµË´Ï´Ù.
+    public float fireCooldown = 5f; // ì´ ì¿¨ë‹¤ìš´ì€ NpcRangedControllerì—ì„œ ê³µê²© ì£¼ê¸°ë¥¼ ì œì–´í•  ë•Œ ì‚¬ìš©ë©ë‹ˆë‹¤.
 
-    [Header("µ¥¹ÌÁö ¼³Á¤")]
+    [Header("ë°ë¯¸ì§€ ì„¤ì •")]
     public int damageAmount = 10;
     public float damageInterval = 1f;
 
     private VRPlayerController playerController;
     private bool isCoolingDown = false;
 
-    // ¿ÜºÎ¿¡¼­ Äğ´Ù¿î »óÅÂ¸¦ È®ÀÎÇÒ ¼ö ÀÖµµ·Ï public ¼Ó¼ºÀ¸·Î ³ëÃâ
+    // ì™¸ë¶€ì—ì„œ ì¿¨ë‹¤ìš´ ìƒíƒœë¥¼ í™•ì¸í•  ìˆ˜ ìˆë„ë¡ public ì†ì„±ìœ¼ë¡œ ë…¸ì¶œ
     public bool IsOnCooldown => isCoolingDown;
 
     void Awake()
     {
-        // VR ÇÃ·¹ÀÌ¾î ÄÁÆ®·Ñ·¯¸¦ Ã£¾Æ¼­ ÂüÁ¶ÇÕ´Ï´Ù.
-        // ÇöÀç °ÔÀÓ¿¡ VRPlayerController°¡ ¾î¶² ¹æ½ÄÀ¸·Î Á¸ÀçÇÏ´ÂÁö¿¡ µû¶ó ÀÌ ·ÎÁ÷Àº º¯°æµÉ ¼ö ÀÖ½À´Ï´Ù.
-        // ¿¹¸¦ µé¾î, GameManager¿¡ ÇÃ·¹ÀÌ¾î ÂüÁ¶°¡ ÀÖ´Ù¸é ±×°÷¿¡¼­ °¡Á®¿Ã ¼öµµ ÀÖ½À´Ï´Ù.
-        var playerObj = GameObject.FindWithTag("MainCamera"); // ÇÃ·¹ÀÌ¾î Ä«¸Ş¶ó(HMD) ±âÁØÀ¸·Î Ã£À½
+        // VR í”Œë ˆì´ì–´ ì»¨íŠ¸ë¡¤ëŸ¬ë¥¼ ì°¾ì•„ì„œ ì°¸ì¡°í•©ë‹ˆë‹¤.
+        // í˜„ì¬ ê²Œì„ì— VRPlayerControllerê°€ ì–´ë–¤ ë°©ì‹ìœ¼ë¡œ ì¡´ì¬í•˜ëŠ”ì§€ì— ë”°ë¼ ì´ ë¡œì§ì€ ë³€ê²½ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+        // ì˜ˆë¥¼ ë“¤ì–´, GameManagerì— í”Œë ˆì´ì–´ ì°¸ì¡°ê°€ ìˆë‹¤ë©´ ê·¸ê³³ì—ì„œ ê°€ì ¸ì˜¬ ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.
+        var playerObj = GameObject.FindWithTag("MainCamera"); // í”Œë ˆì´ì–´ ì¹´ë©”ë¼(HMD) ê¸°ì¤€ìœ¼ë¡œ ì°¾ìŒ
         if (playerObj != null)
         {
             playerController = playerObj.GetComponentInParent<VRPlayerController>();
             if (playerController == null)
-                Debug.LogWarning("VRPlayerController¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù. µ¥¹ÌÁö Àû¿ëÀÌ ¾ÈµÉ ¼ö ÀÖ½À´Ï´Ù.");
+                Debug.LogWarning("VRPlayerControllerë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤. ë°ë¯¸ì§€ ì ìš©ì´ ì•ˆë  ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
         }
         else
         {
-            Debug.LogWarning("MainCamera ÅÂ±×¸¦ °¡Áø ¿ÀºêÁ§Æ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogWarning("MainCamera íƒœê·¸ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         }
 
-        // ¹ß»ç ÁöÁ¡ÀÌ ¼³Á¤µÇÁö ¾Ê¾ÒÀ» °æ¿ì, ½ºÅ©¸³Æ®°¡ ºÙÀº ¿ÀºêÁ§Æ® ÀÚÃ¼¸¦ ¹ß»ç ÁöÁ¡À¸·Î »ç¿ë
+        // ë°œì‚¬ ì§€ì ì´ ì„¤ì •ë˜ì§€ ì•Šì•˜ì„ ê²½ìš°, ìŠ¤í¬ë¦½íŠ¸ê°€ ë¶™ì€ ì˜¤ë¸Œì íŠ¸ ìì²´ë¥¼ ë°œì‚¬ ì§€ì ìœ¼ë¡œ ì‚¬ìš©
         if ((firePoints == null || firePoints.Length == 0) && useFallbackToSelf)
             firePoints = new Transform[] { this.transform };
 
         if (firePoints == null || firePoints.Length == 0)
         {
-            Debug.LogError(gameObject.name + ": NpcRangeAttack¿¡ firePoints°¡ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù. ¹ß»ç¸¦ ¼öÇàÇÒ ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogError(gameObject.name + ": NpcRangeAttackì— firePointsê°€ ì„¤ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤. ë°œì‚¬ë¥¼ ìˆ˜í–‰í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         }
     }
 
-    // ÀÌ ½ºÅ©¸³Æ®´Â ½º½º·Î °ø°İ Á¶°ÇÀ» ÆÇ´ÜÇÏ¿© ¹ß»çÇÏÁö ¾Ê½À´Ï´Ù.
-    // ¿ÀÁ÷ NpcRangedController.cs ¿¡¼­ TriggerFire()¸¦ È£ÃâÇÒ ¶§¸¸ ¹ß»çµË´Ï´Ù.
-    // void Update() { /* ÀÌ ºÎºĞÀº ÀÇµµÀûÀ¸·Î ºñ¿öµÓ´Ï´Ù. */ }
+    // ì´ ìŠ¤í¬ë¦½íŠ¸ëŠ” ìŠ¤ìŠ¤ë¡œ ê³µê²© ì¡°ê±´ì„ íŒë‹¨í•˜ì—¬ ë°œì‚¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
+    // ì˜¤ì§ NpcRangedController.cs ì—ì„œ TriggerFire()ë¥¼ í˜¸ì¶œí•  ë•Œë§Œ ë°œì‚¬ë©ë‹ˆë‹¤.
+    // void Update() { /* ì´ ë¶€ë¶„ì€ ì˜ë„ì ìœ¼ë¡œ ë¹„ì›Œë‘¡ë‹ˆë‹¤. */ }
 
-    // NpcRangedController¿¡¼­ È£ÃâÇÏ¿© ½ÇÁ¦ °ø°İÀ» Æ®¸®°ÅÇÏ´Â ÇÔ¼ö
+    // NpcRangedControllerì—ì„œ í˜¸ì¶œí•˜ì—¬ ì‹¤ì œ ê³µê²©ì„ íŠ¸ë¦¬ê±°í•˜ëŠ” í•¨ìˆ˜
     internal void TriggerFire()
     {
         if (!isCoolingDown)
@@ -80,7 +80,7 @@ public class NpcRangeAttack : MonoBehaviour
             if (firePoints != null && firePoints.Length > 0 && firePoints[0] != null)
                 FireParticle(firePoints[0]);
             else
-                Debug.LogWarning(gameObject.name + ": Single FireModeÀÌ³ª ¹ß»ç ÁöÁ¡À» Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+                Debug.LogWarning(gameObject.name + ": Single FireModeì´ë‚˜ ë°œì‚¬ ì§€ì ì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         }
         else if (fireMode == FireMode.Multi)
         {
@@ -93,46 +93,55 @@ public class NpcRangeAttack : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning(gameObject.name + ": Multi FireModeÀÌ³ª ¹ß»ç ÁöÁ¡ÀÌ ¾ø½À´Ï´Ù.");
+                Debug.LogWarning(gameObject.name + ": Multi FireModeì´ë‚˜ ë°œì‚¬ ì§€ì ì´ ì—†ìŠµë‹ˆë‹¤.");
             }
         }
 
-        // ÆÄÆ¼Å¬ Áö¼Ó ½Ã°£ + Äğ´Ù¿î ½Ã°£¸¸Å­ ±â´Ù¸²
-        // NpcRangedControllerÀÇ animationEventToParticleDelay¿Í´Â º°°³ÀÇ RangeAttack ÀÚÃ¼ÀÇ Äğ´Ù¿î
+        // íŒŒí‹°í´ ì§€ì† ì‹œê°„ + ì¿¨ë‹¤ìš´ ì‹œê°„ë§Œí¼ ê¸°ë‹¤ë¦¼
+        // NpcRangedControllerì˜ animationEventToParticleDelayì™€ëŠ” ë³„ê°œì˜ RangeAttack ìì²´ì˜ ì¿¨ë‹¤ìš´
         yield return new WaitForSeconds(fireCooldown);
-        // Âü°í: particleDurationÀº ParticleSystem ÀÚÃ¼ÀÇ Áö¼Ó ½Ã°£ÀÌ¸ç,
-        // ÆÄÆ¼Å¬ ¿ÀºêÁ§Æ® ÆÄ±«´Â FireParticle ³»ºÎ¿¡¼­ ÀÌ·ç¾îÁö¹Ç·Î,
-        // ¿©±â¼­´Â ¿ÀÁ÷ fireCooldown¸¸ ±â´Ù¸®¸é µË´Ï´Ù.
+        // ì°¸ê³ : particleDurationì€ ParticleSystem ìì²´ì˜ ì§€ì† ì‹œê°„ì´ë©°,
+        // íŒŒí‹°í´ ì˜¤ë¸Œì íŠ¸ íŒŒê´´ëŠ” FireParticle ë‚´ë¶€ì—ì„œ ì´ë£¨ì–´ì§€ë¯€ë¡œ,
+        // ì—¬ê¸°ì„œëŠ” ì˜¤ì§ fireCooldownë§Œ ê¸°ë‹¤ë¦¬ë©´ ë©ë‹ˆë‹¤.
 
         isCoolingDown = false;
     }
 
     private void FireParticle(Transform firePoint)
     {
+        Debug.Log("ğŸ”¥ íŒŒí‹°í´ ë°œì‚¬ ì‹œë„ë¨!");
+
         if (particlePrefab == null)
         {
-            Debug.LogWarning(gameObject.name + ": Particle PrefabÀÌ NpcRangeAttack¿¡ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogWarning("âš ï¸ particlePrefabì´ nullì´ë¼ì„œ ëª» ì¨!");
+            return;
+        }
+
+        if (firePoint == null)
+        {
+            Debug.LogWarning("âš ï¸ firePointê°€ nullì´ì•¼!");
             return;
         }
 
         var psInstance = Instantiate(particlePrefab, firePoint.position, firePoint.rotation);
+        Debug.Log("âœ… íŒŒí‹°í´ ì¸ìŠ¤í„´ìŠ¤ ìƒì„±ë¨: " + psInstance.name);
 
-        // ÆÄÆ¼Å¬ ½Ã½ºÅÛ Ãæµ¹ ¼³Á¤
+        // íŒŒí‹°í´ ì‹œìŠ¤í…œ ì¶©ëŒ ì„¤ì •
         var col = psInstance.collision;
         col.enabled = true;
         col.type = ParticleSystemCollisionType.World;
         col.sendCollisionMessages = true;
-        col.collidesWith = LayerMask.GetMask("Player"); // "Player" ·¹ÀÌ¾î¿Í¸¸ Ãæµ¹ÇÏµµ·Ï ¼³Á¤
+        col.collidesWith = LayerMask.GetMask("Player"); // "Player" ë ˆì´ì–´ì™€ë§Œ ì¶©ëŒí•˜ë„ë¡ ì„¤ì •
 
-        // µ¥¹ÌÁö Ã³¸® ÄÄÆ÷³ÍÆ® Ãß°¡
+        // ë°ë¯¸ì§€ ì²˜ë¦¬ ì»´í¬ë„ŒíŠ¸ ì¶”ê°€
         var dmgHandler = psInstance.gameObject.AddComponent<ParticleDamageOnCollision>();
         dmgHandler.damageAmount = damageAmount;
         dmgHandler.damageInterval = damageInterval;
-        dmgHandler.playerController = playerController; // ÀÌÀü¿¡ Ã£Àº VRPlayerController ÂüÁ¶ Àü´Ş
+        dmgHandler.playerController = playerController; // ì´ì „ì— ì°¾ì€ VRPlayerController ì°¸ì¡° ì „ë‹¬
 
         psInstance.Play();
 
-        // ÆÄÆ¼Å¬ ½Ã½ºÅÛ Àç»ıÀÌ ³¡³ª¸é ¿ÀºêÁ§Æ®¸¦ ÆÄ±« (ÆÄÆ¼Å¬ÀÇ startLifetimeÀ» °í·Á)
+        // íŒŒí‹°í´ ì‹œìŠ¤í…œ ì¬ìƒì´ ëë‚˜ë©´ ì˜¤ë¸Œì íŠ¸ë¥¼ íŒŒê´´ (íŒŒí‹°í´ì˜ startLifetimeì„ ê³ ë ¤)
         Destroy(psInstance.gameObject, particleDuration + psInstance.main.startLifetime.constantMax);
     }
 }

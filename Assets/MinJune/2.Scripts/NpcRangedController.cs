@@ -1,216 +1,108 @@
-using System.Collections;
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.AI;
 using Unity.XR.CoreUtils;
 
-namespace MikeNspired.XRIStarterKit
+public class NpcRangedController : MonoBehaviour
 {
-    public class NpcRangedController : MonoBehaviour, IEnemy
+    public float searchDistance = 10f;
+    public float fieldOfViewAngle = 100f;
+
+    public float patrolSpeed = 2f;
+    public float fireCooldown = 5f;
+
+    public Transform firePoint;
+    public ParticleSystem particlePrefab;
+
+    private float nextFireTime = 0f;
+
+    private NavMeshAgent nav;
+    private Transform player;
+    private Animator anim;
+
+    void Start()
     {
-        [Header("NPC »óÅÂ")]
-        public NpcMode npcMode = NpcMode.patrol;
+        nav = GetComponent<NavMeshAgent>();
+        anim = GetComponentInChildren<Animator>();
 
-        [Header("´É·ÂÄ¡")]
-        public int attackPower = 1;
+        var origin = GameManager.instance?.player?.GetComponent<XROrigin>();
+        if (origin != null)
+            player = origin.Camera.transform;
 
-        [Header("¼øÂû ¹× °¨Áö")]
-        public float patrolSpeed = 2f;
-        public float searchDistance = 10f;
-        public float fieldOfViewAngle = 100f;
+        if (firePoint == null)
+            firePoint = transform; // fallback
+    }
 
-        // [¼öÁ¤µÈ ºÎºĞ] RangeAttack ´ë½Å NpcRangeAttack ÂüÁ¶
-        [Header("¿ø°Å¸® °ø°İ ÄÄÆ÷³ÍÆ®")]
-        public NpcRangeAttack npcRangeAttack; // RangeAttack -> NpcRangeAttackÀ¸·Î º¯°æ
+    void Update()
+    {
+        if (player == null) return;
 
-        // [Ãß°¡µÈ ºÎºĞ] ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ® ÈÄ ÆÄÆ¼Å¬ ¹ß»ç±îÁöÀÇ Áö¿¬ ½Ã°£
-        [Header("°ø°İ Å¸ÀÌ¹Ö Á¶Àı")]
-        [Tooltip("°ø°İ ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®°¡ È£ÃâµÈ ÈÄ ÆÄÆ¼Å¬ÀÌ ¹ß»çµÇ±â±îÁöÀÇ Ãß°¡ Áö¿¬ ½Ã°£ÀÔ´Ï´Ù. (ÃÊ)")]
-        public float animationEventToParticleDelay = 0.0f; // ±âº»°ª 0
+        float distance = Vector3.Distance(transform.position, player.position);
+        Vector3 dir = (player.position - transform.position).normalized;
+        float angle = Vector3.Angle(transform.forward, dir);
 
-        [Header("Á×À½ ÈÄ Dissolve Áö¿¬½Ã°£")]
-        public float deathEffectDelay = 2f;
+        bool blocked = Physics.Linecast(transform.position + Vector3.up, player.position, out RaycastHit hit)
+                       && !hit.collider.CompareTag("Player");
 
-        private NavMeshAgent nav;
-        private Animator anim;
-        private Transform playerCamera;
-        private EnemyHealth enemyHealth;
-        private DissolveEffect dissolveEffect;
-
-        private bool isAttacking = false; // °ø°İ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ Àç»ı ÁßÀÎÁö
-        private bool isPreparingAttack = false; // °ø°İ ÁØºñ Áß (Äğ´Ù¿î Æ÷ÇÔ)
-
-        private void Awake()
+        if (distance < searchDistance && angle < fieldOfViewAngle * 0.5f && !blocked)
         {
-            nav = GetComponent<NavMeshAgent>();
-            anim = GetComponentInChildren<Animator>();
-            enemyHealth = GetComponent<EnemyHealth>();
-            dissolveEffect = GetComponentInChildren<DissolveEffect>();
-
-            // [¼öÁ¤µÈ ºÎºĞ] RangeAttack ´ë½Å NpcRangeAttack ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
-            if (npcRangeAttack == null)
-                npcRangeAttack = GetComponent<NpcRangeAttack>(); // RangeAttack -> NpcRangeAttackÀ¸·Î º¯°æ
-        }
-
-        private void Start()
-        {
-            var origin = GameManager.instance?.player?.GetComponent<XROrigin>();
-            if (origin != null)
-                playerCamera = origin.Camera.transform;
-
-            if (enemyHealth != null)
-            {
-                enemyHealth.OnTakeDamage += _ =>
-                {
-                    if (npcMode != NpcMode.death && Random.value <= 0.1f)
-                        anim.SetTrigger("damage");
-                };
-            }
-        }
-
-        private void Update()
-        {
-            if (playerCamera == null || npcMode == NpcMode.death)
-                return;
-
-            float distance = Vector3.Distance(transform.position, playerCamera.position);
-            Vector3 dir = (playerCamera.position - transform.position).normalized;
-            dir.y = 0;
-            float angle = Vector3.Angle(transform.forward, dir);
-
-            bool blocked = Physics.Linecast(transform.position + Vector3.up,
-                                            playerCamera.position,
-                                            out RaycastHit hit) && !hit.collider.CompareTag("Player");
-
-            // ÇÃ·¹ÀÌ¾î °¨Áö Á¶°Ç
-            if (distance < searchDistance && angle < fieldOfViewAngle * 0.5f && !blocked)
-            {
-                if (npcMode != NpcMode.attack) // °ø°İ ¸ğµå·Î ÁøÀÔ
-                {
-                    npcMode = NpcMode.attack;
-                    isPreparingAttack = false; // ÃÊ±âÈ­
-                }
-
-                // °ø°İ ¸ğµåÀÏ ¶§, ÇöÀç °ø°İ ÁØºñ ÁßÀÌ ¾Æ´Ï°í, NpcRangeAttackÀÌ Äğ´Ù¿îÀÌ ¾Æ´Ò ¶§¸¸ °ø°İ ½Ãµµ
-                if (npcMode == NpcMode.attack && !isPreparingAttack && npcRangeAttack != null && !npcRangeAttack.IsOnCooldown) // [¼öÁ¤] rangeAttack -> npcRangeAttack
-                {
-                    AttackBehavior();
-                }
-                // °ø°İ ¸ğµåÀÏ ¶§´Â Ç×»ó ¸ØÃçÀÖµµ·Ï À¯Áö
-                else if (npcMode == NpcMode.attack)
-                {
-                    nav.ResetPath();
-                    nav.isStopped = true;
-                    FaceTarget(playerCamera.position); // °è¼Ó ÇÃ·¹ÀÌ¾î ÀÀ½Ã
-                }
-            }
-            else // ÇÃ·¹ÀÌ¾î °¨Áö ½ÇÆĞ
-            {
-                if (npcMode != NpcMode.patrol)
-                    npcMode = NpcMode.patrol;
-
-                PatrolMove();
-                isAttacking = false;
-                isPreparingAttack = false; // ÇÃ·¹ÀÌ¾î ³õÄ¡¸é °ø°İ ÁØºñ »óÅÂ ÇØÁ¦
-            }
-        }
-
-        private void PatrolMove()
-        {
-            nav.speed = patrolSpeed;
-            nav.isStopped = false;
-
-            if (!nav.hasPath && RandomPoint(transform.position, 10f, out Vector3 nextPoint))
-                nav.SetDestination(nextPoint);
-        }
-
-        private void AttackBehavior()
-        {
-            if (isAttacking || isPreparingAttack) return; // ÀÌ¹Ì °ø°İ ÁßÀÌ°Å³ª ÁØºñ ÁßÀÌ¸é ÀçÁøÀÔ ¹æÁö
-
-            nav.ResetPath();
-            nav.isStopped = true; // °ø°İ Áß ÀÌµ¿ ¸ØÃã
-
-            FaceTarget(playerCamera.position);
-            anim.SetTrigger("attack");
-            isAttacking = true; // °ø°İ ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı ½ÃÀÛ
-            isPreparingAttack = true; // °ø°İ ÁØºñ »óÅÂ ½ÃÀÛ
-        }
-
-        // ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®·Î ¿¬°á ÇÊ¼ö (°ø°İ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ÆÄÆ¼Å¬ ¹ß»ç Á÷Àü ¶Ç´Â ¹ß»ç ½ÃÁ¡¿¡ ÀÌ ÇÔ¼ö¸¦ È£ÃâÇØ¾ß ÇÔ)
-        public void OnAttackAnimationEnd()
-        {
-            // ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®°¡ È£ÃâµÇ¸é, µô·¹ÀÌ ÄÚ·çÆ¾ ½ÃÀÛ
-            StartCoroutine(TriggerParticleWithDelay());
-        }
-
-        private IEnumerator TriggerParticleWithDelay()
-        {
-            // NpcRangedController¿¡¼­ Ãß°¡µÈ µô·¹ÀÌ
-            if (animationEventToParticleDelay > 0)
-            {
-                yield return new WaitForSeconds(animationEventToParticleDelay);
-            }
-
-            // ÆÄÆ¼Å¬ ¹ß»ç
-            if (npcRangeAttack != null && !npcRangeAttack.IsOnCooldown) // [¼öÁ¤] rangeAttack -> npcRangeAttack
-            {
-                npcRangeAttack.TriggerFire(); // [¼öÁ¤] rangeAttack -> npcRangeAttack
-            }
-
-            // ÆÄÆ¼Å¬ ¹ß»ç ÈÄ °ø°İ ¾Ö´Ï¸ŞÀÌ¼Ç »óÅÂ ÇØÁ¦
-            isAttacking = false;
-            // isPreparingAttackÀº npcRangeAttackÀÇ Äğ´Ù¿îÀÌ ³¡³¯ ¶§±îÁö À¯ÁöµÉ °ÍÀÓ (Update¿¡¼­ !IsOnCooldownÀ¸·Î Á¦¾î)
-        }
-
-        private void FaceTarget(Vector3 target)
-        {
-            Vector3 look = target - transform.position;
-            look.y = 0;
-            Quaternion rot = Quaternion.LookRotation(look);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 5f);
-        }
-
-        public void TakeDamage(float damage, GameObject attacker)
-        {
-            enemyHealth?.TakeDamage(damage, attacker);
-        }
-
-        public void Die()
-        {
-            if (npcMode == NpcMode.death) return;
-            npcMode = NpcMode.death;
-            nav.ResetPath();
             nav.isStopped = true;
-            anim.SetTrigger("death");
-            StartCoroutine(DeathRoutine());
-        }
+            FaceTarget(player.position);
 
-        private IEnumerator DeathRoutine()
-        {
-            yield return new WaitForSeconds(deathEffectDelay);
-
-            if (dissolveEffect != null)
-                dissolveEffect.Dissolve();
-
-            if (dissolveEffect != null)
-                yield return new WaitForSeconds(dissolveEffect.disolveTime);
-
-            Destroy(gameObject);
-        }
-
-        private bool RandomPoint(Vector3 center, float range, out Vector3 result)
-        {
-            for (int i = 0; i < 30; i++)
+            if (Time.time >= nextFireTime)
             {
-                Vector3 randomPos = center + Random.insideUnitSphere * range;
-                if (NavMesh.SamplePosition(randomPos, out NavMeshHit hit, 2f, NavMesh.AllAreas))
-                {
-                    result = hit.position;
-                    return true;
-                }
+                anim.SetTrigger("attack");
+                Fire();
+                nextFireTime = Time.time + fireCooldown;
             }
-            result = Vector3.zero;
-            return false;
         }
+        else
+        {
+            nav.isStopped = false;
+            Patrol();
+        }
+    }
+
+    void Patrol()
+    {
+        nav.speed = patrolSpeed;
+        if (!nav.hasPath && RandomPoint(transform.position, 10f, out Vector3 next))
+        {
+            nav.SetDestination(next);
+        }
+    }
+
+    void FaceTarget(Vector3 target)
+    {
+        Vector3 look = target - transform.position;
+        look.y = 0;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(look), Time.deltaTime * 5f);
+    }
+
+    void Fire()
+    {
+        if (particlePrefab == null || firePoint == null)
+        {
+            Debug.LogWarning("ğŸ’¥ íŒŒí‹°í´ ë°œì‚¬ ì‹¤íŒ¨: í”„ë¦¬íŒ¹ ë˜ëŠ” ìœ„ì¹˜ ì—†ìŒ");
+            return;
+        }
+
+        var ps = Instantiate(particlePrefab, firePoint.position, firePoint.rotation);
+        ps.Play();
+        Destroy(ps.gameObject, ps.main.duration + ps.main.startLifetime.constantMax);
+    }
+
+    bool RandomPoint(Vector3 center, float range, out Vector3 result)
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            Vector3 randomPos = center + Random.insideUnitSphere * range;
+            if (NavMesh.SamplePosition(randomPos, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+            {
+                result = hit.position;
+                return true;
+            }
+        }
+        result = Vector3.zero;
+        return false;
     }
 }
