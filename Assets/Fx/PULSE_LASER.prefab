@@ -9677,6 +9677,7 @@ GameObject:
   - component: {fileID: 23418769449188721}
   - component: {fileID: 6594598162411061089}
   - component: {fileID: 5991871951792864043}
+  - component: {fileID: 1590797302013844786}
   m_Layer: 0
   m_Name: PULSE_LASER
   m_TagString: Untagged
@@ -14522,6 +14523,21 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1590797302013844786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6540745126678396202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a118bf544440b34f92f17fbb68bec56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 10
+  damageInterval: 1
+  playerController: {fileID: 0}
 --- !u!1 &7445774173256234489
 GameObject:
   m_ObjectHideFlags: 0

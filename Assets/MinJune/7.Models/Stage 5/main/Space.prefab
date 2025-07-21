@@ -217,6 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4805711060202516764}
   - component: {fileID: 1912226455055311467}
+  - component: {fileID: 4377769345694283624}
   m_Layer: 0
   m_Name: punch
   m_TagString: Untagged
@@ -262,6 +263,21 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4377769345694283624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3106845418132359073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37272f20660a3b04f921b2add75de6c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitFxPrefab: {fileID: 0}
+  power: 1
+  attackCooldown: 1
 --- !u!1 &3716240455872844310
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,10 +944,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 1
-  patrolSpeed: 2
-  chaseSpeed: 4
-  searchDistance: 10
-  fieldOfViewAngle: 100
+  patrolSpeed: 1
+  chaseSpeed: 2
+  searchDistance: 20
+  fieldOfViewAngle: 200
   deathEffectDelay: 2
   npcMode: 0
 --- !u!114 &8727384579659361967
@@ -946,7 +962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da2853eae5655464db1654f9ef12c8a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 10
   damageCooldown: 0.1
 --- !u!4 &1243885006374492145 stripped
 Transform:

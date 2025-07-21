@@ -53,8 +53,8 @@ public class VRPlayerController : MonoBehaviour
     public bool isDamaged = false;
     public void CalculateHP(int damage)
     {
-        hp += damage;
-        hp = Mathf.Clamp(hp, 0, maxHp);
+        hp -= damage;
+        //hp = Mathf.Clamp(hp, 0, maxHp);
     }
 
     public void CalculateHP(int damage, float time)
