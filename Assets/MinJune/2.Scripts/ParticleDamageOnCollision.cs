@@ -1,32 +1,27 @@
+using System.Collections;
 using UnityEngine;
 
 public class ParticleDamageOnCollision : MonoBehaviour
 {
-    public int damageAmount = 10; // 파티클 데미지 양 (양수 값으로 입력)
-    public float damageInterval = 1f; // 데미지 중복 방지를 위한 간격
-    public VRPlayerController playerController; // 플레이어의 VRPlayerController 참조
+    [HideInInspector] public int damageAmount;
+    [HideInInspector] public float damageInterval;
+    [HideInInspector] public VRPlayerController playerController;
 
-    public int count;
-
-    private float lastDamageTime; // 마지막으로 데미지를 준 시간
+    private bool canDamage = true;
 
     void OnParticleCollision(GameObject other)
     {
-        Debug.Log("충돌");
-        // 충돌한 오브젝트가 "Player" 태그를 가지고 있는지 확인
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("데미지");
-            count++;
-            if (count == 10)
-            {
-                // VRPlayerController의 CalculateHP 함수를 호출하고, 데미지 양을 음수로 전달
-                playerController = other.GetComponent<VRPlayerController>();
-                playerController.CalculateHP(1);
-                count = 0;
-            }
-        }
+        if (!canDamage || !other.CompareTag("Player")) return;
+        if (playerController == null) return;
 
+        playerController.CalculateHP(-damageAmount);
+        StartCoroutine(DamageCooldown());
+    }
 
+    private IEnumerator DamageCooldown()
+    {
+        canDamage = false;
+        yield return new WaitForSeconds(damageInterval);
+        canDamage = true;
     }
 }
