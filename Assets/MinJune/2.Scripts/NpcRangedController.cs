@@ -24,6 +24,9 @@ public class NpcRangedController : MonoBehaviour, IEnemy
     [Header("회전 속도")]
     public float rotationSpeed = 5f;
 
+    [Header("죽음 이펙트")] // 추가: 죽음 이펙트 헤더
+    public ParticleSystem deathParticlePrefab; // 추가: 죽음 파티클 프리팹
+
     private NavMeshAgent nav;
     private Animator anim;
     private Transform playerCamera;
@@ -137,7 +140,15 @@ public class NpcRangedController : MonoBehaviour, IEnemy
     /// </summary>
     public void Die()
     {
-        // (여기에 사망 애니메이션/이펙트 추가 가능)
+        // 죽음 파티클 생성 및 재생
+        if (deathParticlePrefab != null) //
+        {
+            var particle = Instantiate(deathParticlePrefab, transform.position, Quaternion.identity); //
+            particle.Play(); //
+            Destroy(particle.gameObject, particle.main.duration); // 파티클 재생이 끝나면 제거
+        }
+
+        // (기존의 사망 애니메이션/이펙트 로직이 NpcController와 다르므로, 필요시 추가)
         Destroy(gameObject);
     }
 }

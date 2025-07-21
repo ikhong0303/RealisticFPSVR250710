@@ -947,6 +947,7 @@ MonoBehaviour:
   damageAmount: 10
   damageInterval: 1
   rotationSpeed: 5
+  deathParticlePrefab: {fileID: 6862180978674002505, guid: dc1290dc28fe4704fbe84c42b3cf912f, type: 3}
 --- !u!4 &4781190126017555148 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8169382868667117632, guid: ff95266a3a0580441977b81d8385d26f, type: 3}

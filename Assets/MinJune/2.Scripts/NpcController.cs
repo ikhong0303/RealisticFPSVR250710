@@ -22,6 +22,7 @@ public class NpcController : MonoBehaviour, IEnemy
 
     [Header("죽음 이펙트")]
     public float deathDelay = 2f;
+    public ParticleSystem deathParticlePrefab; // 추가: 죽음 파티클 프리팹
     private DissolveEffect dissolveEffect; // (선택사항)
 
     private NavMeshAgent nav;
@@ -138,6 +139,15 @@ public class NpcController : MonoBehaviour, IEnemy
         npcMode = NpcMode.Death;
         nav.ResetPath();
         anim?.SetTrigger("death");
+
+        // 죽음 파티클 생성 및 재생
+        if (deathParticlePrefab != null) //
+        {
+            var particle = Instantiate(deathParticlePrefab, transform.position, Quaternion.identity); //
+            particle.Play(); //
+            Destroy(particle.gameObject, particle.main.duration); // 파티클 재생이 끝나면 제거
+        }
+
         StartCoroutine(DeathRoutine());
     }
 

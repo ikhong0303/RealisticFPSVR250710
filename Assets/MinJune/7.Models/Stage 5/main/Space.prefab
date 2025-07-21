@@ -951,6 +951,7 @@ MonoBehaviour:
   meleeDamage: 1
   meleeCooldown: 0.1
   deathDelay: 2
+  deathParticlePrefab: {fileID: 6862180978674002505, guid: dc1290dc28fe4704fbe84c42b3cf912f, type: 3}
 --- !u!114 &8727384579659361967
 MonoBehaviour:
   m_ObjectHideFlags: 0
