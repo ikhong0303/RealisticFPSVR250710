@@ -345,6 +345,37 @@ CapsuleCollider:
   m_Height: 0.34
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &6422543549284557741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7289835447708778246}
+  m_Layer: 0
+  m_Name: firePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7289835447708778246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6422543549284557741}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2762385, y: 1.265, z: 1.059}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3787509714150784359}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6722355362523153193
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,15 +731,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.6603854
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.74
+      value: 0.5125166
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 29.67
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -789,6 +820,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 7289835447708778246}
     - targetCorrespondingSourceObject: {fileID: 2559285840627121667, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
       insertIndex: 0
       addedObject: {fileID: 4434028240166849029}
@@ -829,9 +863,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2210656621927501891}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 187666748861790093}
   m_SourcePrefab: {fileID: 100100000, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
 --- !u!4 &1189268680986666127 stripped
 Transform:
@@ -846,6 +877,11 @@ Transform:
 --- !u!4 &3076211105150461252 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
+  m_PrefabInstance: {fileID: 3676425458782640780}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3787509714150784359 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
   m_PrefabInstance: {fileID: 3676425458782640780}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4594833425985972189 stripped
@@ -863,7 +899,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -901,37 +937,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348c981d765458246b4c880f24fe4395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcMode: 0
-  attackPower: 1
-  patrolSpeed: 2
-  searchDistance: 10
-  fieldOfViewAngle: 100
-  rangeAttack: {fileID: 187666748861790093}
-  deathEffectDelay: 2
---- !u!114 &187666748861790093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4594833425985972189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f40af5603bbd22b4c922a41c13686cef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trackingTarget: {fileID: 0}
-  fireMode: 0
-  firePoints: []
-  useFallbackToSelf: 1
-  fireRange: 10
-  rotationSpeed: 5
-  fireAngleThreshold: 5
-  particlePrefab: {fileID: 0}
+  searchDistance: 25
+  fieldOfViewAngle: 180
+  patrolSpeed: 1
+  firePoint: {fileID: 7289835447708778246}
+  particlePrefab: {fileID: 7619600479367008576, guid: 008e9e32692f45a4ab727b8f16b721a8, type: 3}
   particleDuration: 2
-  fireCooldown: 5
+  fireCooldown: 2
   damageAmount: 10
   damageInterval: 1
+  rotationSpeed: 5
 --- !u!4 &4781190126017555148 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8169382868667117632, guid: ff95266a3a0580441977b81d8385d26f, type: 3}

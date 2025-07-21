@@ -943,13 +943,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2e339da30905546a8c33421073fd8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 1
-  patrolSpeed: 1
-  chaseSpeed: 2
-  searchDistance: 20
-  fieldOfViewAngle: 200
-  deathEffectDelay: 2
   npcMode: 0
+  patrolSpeed: 1
+  chaseSpeed: 1
+  searchDistance: 20
+  fieldOfViewAngle: 360
+  meleeDamage: 1
+  meleeCooldown: 0.1
+  deathDelay: 2
 --- !u!114 &8727384579659361967
 MonoBehaviour:
   m_ObjectHideFlags: 0

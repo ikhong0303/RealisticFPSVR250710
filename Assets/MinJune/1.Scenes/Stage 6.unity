@@ -3030,23 +3030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
-  attackPower: 2
-  weapon: {fileID: 0}
-  attackAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Attack
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 7dc0bb83-7f5d-46a9-83e9-1e64e05b96a6
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
   maxHp: 100
-  isDamaged: 0
-  currentAmmo: 0
 --- !u!1 &439669373 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6938978007382601096, guid: c010e03185d7bfc46b4e52cd46c4813c, type: 3}
@@ -3333,17 +3317,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e83c2ee1d671557419bc873af131e740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcPrefab: {fileID: 303975146555970920, guid: 900682c47cf3717479f80b3243c8aac4, type: 3}
+  spawnEntries: []
   spawnEffectPrefab: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
+  delayBetweenSpawns: 0.5
+  npcSpawnDelayAfterEffectStart: 0.1
   playerTag: Player
-  spawnPoints:
-  - {fileID: 1714500257}
-  - {fileID: 1737737076}
-  - {fileID: 1144009043}
-  - {fileID: 1224012552}
-  - {fileID: 631864528}
-  - {fileID: 923959886}
-  - {fileID: 0}
 --- !u!136 &600716695
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3431,7 +3409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &652853188
 MonoBehaviour:
   m_ObjectHideFlags: 0
