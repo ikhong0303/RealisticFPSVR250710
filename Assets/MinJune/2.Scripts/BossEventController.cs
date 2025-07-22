@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using MikeNspired.XRIStarterKit;
 
@@ -59,14 +60,14 @@ public class BossEventController : MonoBehaviour
 
         float curHp = GetCurrentHp();
 
-        // 1. 체력 30 이하에 스포너 등장
+        // 1. 체력 이하일 때 스포너 소환
         if (!npcSpawnerActivated && curHp <= npcSpawnerTriggerHP && curHp > 0f)
         {
             npcSpawnerActivated = true;
             SpawnAllSpawners();
         }
 
-        // 2. 체력 0 이하(사망) 처리
+        // 2. 체력 0 이하 -> 사망 처리
         if (curHp <= 0f)
         {
             isDead = true;
@@ -78,12 +79,15 @@ public class BossEventController : MonoBehaviour
                     Instantiate(entry.prefabToSpawn, entry.spawnPoint.position, entry.spawnPoint.rotation);
             }
 
-            // (2) 사망 이펙트(파티클)
+            // (2) 사망 이펙트 (파티클)
             if (deathEffectPrefab)
-                Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
+            {
+                GameObject effect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
+                Destroy(effect, 5f); // 파티클 지속시간 이후 제거
+            }
 
-            // (3) 보스 삭제
-            Destroy(gameObject);
+            // (3) 보스 오브젝트 삭제 (코루틴으로 지연)
+            StartCoroutine(DelayedDestroy());
         }
     }
 
@@ -94,7 +98,8 @@ public class BossEventController : MonoBehaviour
         {
             if (entry.npcSpawnerPrefab && entry.spawnPoint)
             {
-                var spawned = Instantiate(entry.npcSpawnerPrefab, entry.spawnPoint.position, entry.spawnPoint.rotation);
+                Instantiate(entry.npcSpawnerPrefab, entry.spawnPoint.position, entry.spawnPoint.rotation);
+
                 if (entry.spawnEffectPrefab)
                     Instantiate(entry.spawnEffectPrefab, entry.spawnPoint.position, entry.spawnPoint.rotation);
             }
@@ -110,5 +115,12 @@ public class BossEventController : MonoBehaviour
             return (float)field.GetValue(bossHealth);
         }
         return -1f;
+    }
+
+    // 보스 오브젝트 삭제를 지연시켜 파티클이 먼저 재생되도록 함
+    private IEnumerator DelayedDestroy()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
     }
 }

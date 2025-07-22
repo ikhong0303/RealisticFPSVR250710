@@ -4141,7 +4141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10b28565f2399b64db1879981eb4908b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossHealth: {fileID: 0}
+  bossHealth: {fileID: 1013520588}
   npcSpawnerTriggerHP: 30
   npcSpawners:
   - npcSpawnerPrefab: {fileID: 919132149155446097, guid: 16291abc085c0a941870bd21b18e0b4f, type: 3}
