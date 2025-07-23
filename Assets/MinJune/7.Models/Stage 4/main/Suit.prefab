@@ -897,6 +897,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a5aec2a41539ea14d95f7e28636ec35a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3767625331373794133}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a5aec2a41539ea14d95f7e28636ec35a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1270951007505180286}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a5aec2a41539ea14d95f7e28636ec35a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2031518976206721573}
   m_SourcePrefab: {fileID: 100100000, guid: a5aec2a41539ea14d95f7e28636ec35a, type: 3}
 --- !u!4 &763331280482756700 stripped
 Transform:
@@ -950,13 +956,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2e339da30905546a8c33421073fd8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 1
+  npcMode: 0
   patrolSpeed: 2
   chaseSpeed: 4
   searchDistance: 10
   fieldOfViewAngle: 100
-  deathEffectDelay: 2
-  npcMode: 0
+  meleeDamage: 1
+  meleeCooldown: 1
+  deathDelay: 2
+  deathParticlePrefab: {fileID: 0}
+--- !u!114 &1270951007505180286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6954064124253924340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2853eae5655464db1654f9ef12c8a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  damageCooldown: 0.1
+--- !u!195 &-2031518976206721573
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6954064124253924340}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!4 &7219715232935899353 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 608321761475470972, guid: a5aec2a41539ea14d95f7e28636ec35a, type: 3}

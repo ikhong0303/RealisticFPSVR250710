@@ -721,6 +721,80 @@ CapsuleCollider:
   m_Height: 0.45
   m_Direction: 1
   m_Center: {x: 0, y: -0.08, z: 0}
+--- !u!1001 &2830949068020766247
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3076211105150461252}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5963656
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5963655
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5963655
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.007569097
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.06256887
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.015753902
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.07449511
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.17506407
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7423198
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.64246744
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 78.497
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 145.011
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -55.421
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+      propertyPath: m_Name
+      value: Knight.Gun
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+--- !u!4 &2360788151467028940 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b971c1670a6aec4785b9fe4c48a6349, type: 3}
+  m_PrefabInstance: {fileID: 2830949068020766247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3676425458782640780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -853,6 +927,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852576806548013000, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8547703012921249850}
+    - targetCorrespondingSourceObject: {fileID: 1852576806548013000, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2360788151467028940}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ff95266a3a0580441977b81d8385d26f, type: 3}
       insertIndex: -1
@@ -941,7 +1018,7 @@ MonoBehaviour:
   fieldOfViewAngle: 180
   patrolSpeed: 1
   firePoint: {fileID: 7289835447708778246}
-  particlePrefab: {fileID: 7619600479367008576, guid: 008e9e32692f45a4ab727b8f16b721a8, type: 3}
+  particlePrefab: {fileID: 8601865154892981423, guid: df76e36d51fde6a4282cb87a791e28d3, type: 3}
   particleDuration: 2
   fireCooldown: 2
   damageAmount: 10

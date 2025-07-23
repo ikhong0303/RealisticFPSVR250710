@@ -414,6 +414,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageMultiplier: 1
+--- !u!1 &6752746465543635824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5269141134863100078}
+  - component: {fileID: 517731240652243204}
+  m_Layer: 0
+  m_Name: punch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5269141134863100078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6752746465543635824}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.00000044703464, y: -0.08097478, z: 0.00000041350702, w: 0.99671614}
+  m_LocalPosition: {x: -0.012641564, y: 0.3582429, z: -0.016831085}
+  m_LocalScale: {x: 0.45166034, y: 0.4516603, z: 0.45165}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5116629433843493332}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &517731240652243204
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6752746465543635824}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7410093525204504163
 GameObject:
   m_ObjectHideFlags: 0
@@ -857,6 +912,9 @@ PrefabInstance:
       addedObject: {fileID: 1500844208448269602}
     - targetCorrespondingSourceObject: {fileID: -1812909498023395591, guid: fb2771b2118d4df41ae5ca08c5e26318, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 5269141134863100078}
+    - targetCorrespondingSourceObject: {fileID: -1812909498023395591, guid: fb2771b2118d4df41ae5ca08c5e26318, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 8101786851258247874}
     - targetCorrespondingSourceObject: {fileID: -3321919801592875672, guid: fb2771b2118d4df41ae5ca08c5e26318, type: 3}
       insertIndex: -1
@@ -947,13 +1005,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2e339da30905546a8c33421073fd8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 1
+  npcMode: 0
   patrolSpeed: 1
   chaseSpeed: 2
   searchDistance: 5
   fieldOfViewAngle: 10
-  deathEffectDelay: 2
-  npcMode: 0
+  meleeDamage: 1
+  meleeCooldown: 1
+  deathDelay: 2
+  deathParticlePrefab: {fileID: 0}
 --- !u!114 &7472649876549269962
 MonoBehaviour:
   m_ObjectHideFlags: 0
