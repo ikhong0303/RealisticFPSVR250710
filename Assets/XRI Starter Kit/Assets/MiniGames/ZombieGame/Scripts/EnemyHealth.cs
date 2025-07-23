@@ -33,8 +33,11 @@ namespace MikeNspired.XRIStarterKit
 
             if (currentHealth <= 0f)
             {
-                if (enemy != null) enemy.Die();
-                else Destroy(gameObject);
+                if (enemy != null)
+                {
+                    enemy.Die();
+                }
+                // else Destroy(gameObject); ← 이 부분 주석 처리하여 BossEventController에게 맡김
             }
         }
 

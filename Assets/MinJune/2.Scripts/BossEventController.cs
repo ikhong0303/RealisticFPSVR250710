@@ -56,42 +56,50 @@ public class BossEventController : MonoBehaviour
 
     private void OnBossTakeDamage(float damage)
     {
-        if (isDead) return;
-
         float curHp = GetCurrentHp();
 
-        // 1. 체력 이하일 때 스포너 소환
         if (!npcSpawnerActivated && curHp <= npcSpawnerTriggerHP && curHp > 0f)
         {
+            Debug.Log("보스 체력 트리거 이하 → 스포너 활성화");
             npcSpawnerActivated = true;
             SpawnAllSpawners();
         }
 
-        // 2. 체력 0 이하 -> 사망 처리
-        if (curHp <= 0f)
+        if (!isDead && Mathf.Approximately(curHp, 0f))
         {
+            Debug.Log("보스 체력 0 이하 → 사망 처리 시작");
             isDead = true;
 
-            // (1) 사망시 프리팹 소환
+            // (1) 아이템 드롭
             foreach (var entry in spawnOnDeathList)
             {
                 if (entry.prefabToSpawn && entry.spawnPoint)
                     Instantiate(entry.prefabToSpawn, entry.spawnPoint.position, entry.spawnPoint.rotation);
             }
 
-            // (2) 사망 이펙트 (파티클)
+            // (2) 파티클 재생
             if (deathEffectPrefab)
             {
-                GameObject effect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
-                Destroy(effect, 5f); // 파티클 지속시간 이후 제거
+                Debug.Log("deathEffectPrefab 생성 시도");
+
+                Vector3 effectPos = transform.position + Vector3.up * 1f;
+                GameObject effect = Instantiate(deathEffectPrefab, effectPos, Quaternion.identity);
+
+                var ps = effect.GetComponent<ParticleSystem>();
+                if (ps != null)
+                {
+                    Debug.Log("파티클 직접 Play()");
+                    ps.Play();
+                }
+
+                Destroy(effect, 5f);
             }
 
-            // (3) 보스 오브젝트 삭제 (코루틴으로 지연)
+            // (3) 보스 제거 딜레이
             StartCoroutine(DelayedDestroy());
         }
     }
 
-    // NpcSpawner 여러개 소환
     private void SpawnAllSpawners()
     {
         foreach (var entry in npcSpawners)
@@ -106,7 +114,6 @@ public class BossEventController : MonoBehaviour
         }
     }
 
-    // EnemyHealth의 currentHealth를 리플렉션으로 안전하게 읽음
     private float GetCurrentHp()
     {
         var field = typeof(EnemyHealth).GetField("currentHealth", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
@@ -117,10 +124,9 @@ public class BossEventController : MonoBehaviour
         return -1f;
     }
 
-    // 보스 오브젝트 삭제를 지연시켜 파티클이 먼저 재생되도록 함
     private IEnumerator DelayedDestroy()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 }
