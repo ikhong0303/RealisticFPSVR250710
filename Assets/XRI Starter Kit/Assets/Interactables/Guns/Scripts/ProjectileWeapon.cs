@@ -1,8 +1,4 @@
-﻿// ProjectileWeapon.cs (Audio null-check 적용된 소총용 스크립트)
-// 작성자: MikeNspired
-// 이 스크립트는 VR 환경에서 소총 발사, 무제한 탄약, 발사 딜레이, 반동 및 햅틱 기능을 구현합니다.
-
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -26,6 +22,10 @@ namespace MikeNspired.XRIStarterKit
         [SerializeField] private AudioSource fireAudio;            // 발사 사운드 (Inspector에서 할당 필요)
         [SerializeField] private float bulletSpeed = 150f;         // 발사 속도
         [SerializeField] private float fireDelay = 0.2f;           // 연속 발사 간 딜레이 (초)
+
+        [Header("발사 이펙트")] // 👈
+        [SerializeField] private GameObject muzzleFlashPrefab; // Inspector에서 파티클 프리팹 직접 지정 👈
+        [SerializeField] private float muzzleFlashDestroyDelay = 2f; // 최소 삭제 시간 👈
 
         [Header("반동 및 햅틱")]
         [SerializeField] public float recoilAmount = -0.03f;      // 밀림 거리
@@ -63,6 +63,7 @@ namespace MikeNspired.XRIStarterKit
         /// - fireDelay로 연속 발사 제한
         /// - 총알 인스턴스 생성 → 힘 적용
         /// - 사운드 및 햅틱 → 이벤트 호출 → 반동 시작
+        /// - Inspector에서 설정한 파티클(이펙트)도 생성됨 👈
         /// </summary>
         public void FireGun()
         {
@@ -78,6 +79,22 @@ namespace MikeNspired.XRIStarterKit
             // 발사 사운드 (fireAudio가 할당되어 있고 clip이 존재할 때만 재생)
             if (fireAudio != null && fireAudio.clip != null)
                 fireAudio.PlayOneShot(fireAudio.clip);
+
+            // 🔥 파티클(이펙트) 생성 👈
+            if (muzzleFlashPrefab != null && firePoint != null)
+            {
+                GameObject fx = Instantiate(muzzleFlashPrefab, firePoint.position, firePoint.rotation);
+                // Destroy 시간 결정 (프리팹 안 파티클 전체의 최대 지속시간을 기준)
+                float maxDuration = 0f;
+                var psArr = fx.GetComponentsInChildren<ParticleSystem>();
+                foreach (var ps in psArr)
+                {
+                    float duration = ps.main.duration + ps.main.startLifetime.constantMax;
+                    if (duration > maxDuration) maxDuration = duration;
+                }
+                if (maxDuration < 0.1f) maxDuration = muzzleFlashDestroyDelay; // fallback
+                Destroy(fx, maxDuration);
+            }
 
             // 햅틱 피드백
             if (controller)
