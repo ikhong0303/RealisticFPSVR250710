@@ -1,0 +1,247 @@
+fileFormatVersion: 2
+guid: f4f7840e82cbb6043b657c03b9214877
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cryo_0
+    second: {fileID: 2100000, guid: 44e666f8e2daa864a94e217bc0854b53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Desk_chair
+    second: {fileID: 2100000, guid: 18a9c04e69b1eac4d934b9c3cb0a9a71, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Food_2
+    second: {fileID: 2100000, guid: 348388e5504a9df4fb0838482227a608, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Space_0
+    second: {fileID: 2100000, guid: f78fbb8e32dd09443aee87ed129c1a1f, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cryo_0_Alpha
+    second: {fileID: 2800000, guid: a3fcf9f25e41bf545a6fcf272724c2ec, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cryo_0_BaseColor
+    second: {fileID: 2800000, guid: 4216d1c03c4aaff41982dacf8cbac399, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cryo_0_Emission
+    second: {fileID: 2800000, guid: 16b6efacfa057b3408aaf476e48547c8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cryo_0_Metallic
+    second: {fileID: 2800000, guid: 2e908da898a3e2a48b38f6e04605743d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cryo_0_Normal
+    second: {fileID: 2800000, guid: ea4397ece72cfca459a568c981906361, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cryo_0_Roughness
+    second: {fileID: 2800000, guid: 8f5f184e37821fc45a1ab2be40ea38aa, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Desk_chair_Alpha
+    second: {fileID: 2800000, guid: 0ed60f5f30b8c6a40b2b6c9271c8edd3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Desk_chair_BaseColor
+    second: {fileID: 2800000, guid: 5cf87acc92eed9a4c8c03138d1b6c2ca, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Desk_chair_Emission
+    second: {fileID: 2800000, guid: b2b05b63969e50c40b246292fb84953c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Desk_chair_Metallic
+    second: {fileID: 2800000, guid: 5a3b4ead9a65de748ba39ff016e7891c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Desk_chair_Normal
+    second: {fileID: 2800000, guid: 8e4a73d416a57744ab551acc52137896, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Desk_chair_Roughness
+    second: {fileID: 2800000, guid: dd044962f18d3bd43b7b4a0de1323198, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Food_2_Alpha
+    second: {fileID: 2800000, guid: fff090ceb073c4e499074a697c9f4f4e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Food_2_BaseColor
+    second: {fileID: 2800000, guid: 6200e9d034adac742a4453d1834dd996, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Food_2_Emission
+    second: {fileID: 2800000, guid: 8dd295acf33597241aa0f32ccc2c1593, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Food_2_Metallic
+    second: {fileID: 2800000, guid: 59bb6e3fa12936247b4342e605a04cad, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Food_2_Normal
+    second: {fileID: 2800000, guid: 13c58d0e0964ea24b9c78a64cadb7d2e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Food_2_Roughness
+    second: {fileID: 2800000, guid: 55953dc7b394d1844865dd4029fa9c27, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Space_0_Alpha
+    second: {fileID: 2800000, guid: aafb6ed3132ba0c47a37c060c3e1923a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Space_0_BaseColor
+    second: {fileID: 2800000, guid: 843e5a111dde44141b5408d6d481b792, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Space_0_Emission
+    second: {fileID: 2800000, guid: e2c0183ec79c0dd4e83bee66e02cba8a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Space_0_Metallic
+    second: {fileID: 2800000, guid: 46cdc67b396a2ea449158cb0ab814fc1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Space_0_Normal
+    second: {fileID: 2800000, guid: 828436aa6249afe4fb3a88fc4b5241c3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Space_0_Roughness
+    second: {fileID: 2800000, guid: 3933d96efe889d14ebba6e50bed42399, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
