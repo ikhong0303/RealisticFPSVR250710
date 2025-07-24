@@ -86,13 +86,13 @@ public class BossEventController : MonoBehaviour
                 GameObject effect = Instantiate(deathEffectPrefab, effectPos, Quaternion.identity);
 
                 var ps = effect.GetComponent<ParticleSystem>();
+                float destroyDelay = 5f;
                 if (ps != null)
                 {
-                    Debug.Log("파티클 직접 Play()");
+                    destroyDelay = ps.main.duration + ps.main.startLifetime.constantMax;
                     ps.Play();
                 }
-
-                Destroy(effect, 5f);
+                Destroy(effect, destroyDelay);
             }
 
             // (3) 보스 제거 딜레이
@@ -109,7 +109,21 @@ public class BossEventController : MonoBehaviour
                 Instantiate(entry.npcSpawnerPrefab, entry.spawnPoint.position, entry.spawnPoint.rotation);
 
                 if (entry.spawnEffectPrefab)
-                    Instantiate(entry.spawnEffectPrefab, entry.spawnPoint.position, entry.spawnPoint.rotation);
+                {
+                    GameObject fx = Instantiate(entry.spawnEffectPrefab, entry.spawnPoint.position, entry.spawnPoint.rotation);
+
+                    // 모든 ParticleSystem에서 최대 재생 시간 구함
+                    float maxDuration = 0f;
+                    var allParticles = fx.GetComponentsInChildren<ParticleSystem>();
+                    foreach (var ps in allParticles)
+                    {
+                        float duration = ps.main.duration + ps.main.startLifetime.constantMax;
+                        if (duration > maxDuration) maxDuration = duration;
+                    }
+                    if (maxDuration < 0.5f) maxDuration = 5f; // fallback
+
+                    Destroy(fx, maxDuration);
+                }
             }
         }
     }
