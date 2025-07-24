@@ -953,13 +953,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2e339da30905546a8c33421073fd8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 1
+  npcMode: 0
   patrolSpeed: 2
   chaseSpeed: 4
   searchDistance: 10
   fieldOfViewAngle: 100
-  deathEffectDelay: 2
-  npcMode: 0
+  meleeDamage: 1
+  meleeCooldown: 1
+  deathDelay: 2
+  deathParticlePrefab: {fileID: 2203680134253406241, guid: 3068fa71ed3ced848a089161a8191dc1, type: 3}
 --- !u!114 &1863315708606918725
 MonoBehaviour:
   m_ObjectHideFlags: 0
