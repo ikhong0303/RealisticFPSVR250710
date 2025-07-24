@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
-/// 트리거에 들어오면 여러 대상 오브젝트의 메테리얼을 전부 지정한 것으로 변경,
-/// 나가면 모두 원래 메테리얼로 복원.
+/// 트리거에 플레이어가 들어오면 여러 대상 오브젝트의 메테리얼을 전부 지정한 것으로 변경,
+/// 플레이어가 나가면 모두 원래 메테리얼로 복원.
 /// </summary>
 public class ChangeOtherMaterialOnTrigger : MonoBehaviour
 {
@@ -43,21 +43,32 @@ public class ChangeOtherMaterialOnTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // 트리거가 켜졌을 때 모든 대상의 메테리얼 변경
+        Debug.Log($"트리거 진입: {other.name}, 태그: {other.tag}");
+
+        if (!other.CompareTag("Player")) return;
+
         foreach (var t in targets)
         {
-            if (t.renderer && t.newMaterial)
+            if (t.renderer == null)
+                Debug.LogWarning($"[{t.targetObject?.name}]에 Renderer가 없습니다!");
+            else if (t.newMaterial == null)
+                Debug.LogWarning($"[{t.targetObject?.name}]에 적용할 New Material이 없습니다!");
+            else
+            {
+                Debug.Log($"[{t.targetObject.name}] 메테리얼 교체!");
                 t.renderer.material = t.newMaterial;
+            }
         }
     }
-
     void OnTriggerExit(Collider other)
     {
-        // 트리거에서 벗어나면 모두 원래 메테리얼로 복구
+        Debug.Log($"{other.name} 트리거 이탈!");
+        if (!other.CompareTag("Player")) return;
         foreach (var t in targets)
         {
             if (t.renderer && t.originalMaterial)
                 t.renderer.material = t.originalMaterial;
         }
     }
+
 }
