@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5953945024153432029
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8816870210995649824, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4dcb11a053220b246ac7d490182e30ea, type: 2}
+    - target: {fileID: -8746058855735016753, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9b7d7125a8ab0204abbadc51cfe74221, type: 2}
+    - target: {fileID: -8679921383154817045, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.073492
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0049233437
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 28.641708
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4718122755856771252, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 81175dc707a02344ea24ac701eb1b0e1, type: 2}
+    - target: {fileID: -4396642182433536433, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0e03e590c7ef4b247817ad66caa449ed, type: 2}
+    - target: {fileID: -4318742857284725069, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e4d21ecd25dc6ce4498cf4accf8a12e9, type: 2}
+    - target: {fileID: -4157456459163486426, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6710a8ee5f8a6bf40b4c7cb4bb7b5237, type: 2}
+    - target: {fileID: 919132149155446097, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: m_Name
+      value: Dressbot@Female Dance Pose
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438196526767402093, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7586740ec8d19aa47b411de1352ae73d, type: 2}
+    - target: {fileID: 3851044868119456455, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b9b57b46d796c1c4690eba0f6da02365, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 087ed489af4e6774d92b86f3ed2f5017, type: 3}
