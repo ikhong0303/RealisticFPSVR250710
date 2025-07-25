@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 /// <summary>
 /// 트리거에 플레이어가 들어오면 여러 대상 오브젝트의 메테리얼을 전부 지정한 것으로 변경,
-/// 플레이어가 나가면 모두 원래 메테리얼로 복원.
+/// 트리거에서 나가도 계속 변경 상태로 유지된다.
 /// </summary>
 public class ChangeOtherMaterialOnTrigger : MonoBehaviour
 {
@@ -60,15 +60,6 @@ public class ChangeOtherMaterialOnTrigger : MonoBehaviour
             }
         }
     }
-    void OnTriggerExit(Collider other)
-    {
-        Debug.Log($"{other.name} 트리거 이탈!");
-        if (!other.CompareTag("Player")) return;
-        foreach (var t in targets)
-        {
-            if (t.renderer && t.originalMaterial)
-                t.renderer.material = t.originalMaterial;
-        }
-    }
 
+    // OnTriggerExit은 아예 제거했으니, 트리거에서 나가도 상태가 유지됩니다.
 }
