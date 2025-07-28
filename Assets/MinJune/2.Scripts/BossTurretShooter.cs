@@ -1,44 +1,43 @@
+ï»¿using System.Collections;
 using UnityEngine;
-using System.Collections;
 
 public class BossTurretShooter : MonoBehaviour
 {
     public enum AttackPattern { SingleShot, MultiShot }
 
-    [Header("ÆĞÅÏ ¼±ÅÃ (ÄÚµå/Inspector¿¡¼­ º¯°æ °¡´É)")]
+    [Header("íŒ¨í„´ ì„ íƒ (ì½”ë“œ/Inspectorì—ì„œ ë³€ê²½ ê°€ëŠ¥)")]
     public AttackPattern currentPattern = AttackPattern.SingleShot;
 
-    [Header("°øÅë - ÇÃ·¹ÀÌ¾î ÃßÀû/È¸Àü")]
+    [Header("ê³µí†µ - í”Œë ˆì´ì–´ ì¶”ì /íšŒì „")]
     public float rotationSpeed = 5f;
     public float fireRange = 20f;
 
-    [Header("ÄğÅ¸ÀÓ")]
+    [Header("ì¿¨íƒ€ì„")]
     public float singleShotCooldown = 5f;
     public float multiShotCooldown = 8f;
     private float nextFireTime = 0f;
 
-    [Header("´Ü¹ß ÆĞÅÏ(·¹ÀÌÀú)")]
+    [Header("ë‹¨ë°œ íŒ¨í„´(ë ˆì´ì €)")]
     public Transform[] singleFirePoints;
     public ParticleSystem singleParticlePrefab;
     public float singleParticleDuration = 2f;
     public int singleDamage = 10;
     public float singleDamageInterval = 1f;
 
-    [Header("¸ÖÆ¼¼¦ ÆĞÅÏ(¿¬»ç/µ¿½Ã¹ß»ç)")]
+    [Header("ë©€í‹°ìƒ· íŒ¨í„´(ì—°ì‚¬/ë™ì‹œë°œì‚¬)")]
     public Transform[] multiFirePoints;
     public ParticleSystem multiParticlePrefab;
     public float multiParticleDuration = 1.2f;
     public int multiDamage = 5;
     public float multiDamageInterval = 0.4f;
 
-    // ÆĞÅÏ ÀüÈ¯ ÁÖ±â
     public float minPatternDuration = 5f;
     public float maxPatternDuration = 10f;
 
     private Transform playerTarget;
     private VRPlayerController playerController;
 
-    private int lastPatternIdx = -1; // ¿¬¼Ó Áßº¹ ¹æÁö¿ë
+    private int lastPatternIdx = -1; // ì—°ì† ì¤‘ë³µ ë°©ì§€ìš©
 
     void Start()
     {
@@ -55,7 +54,7 @@ public class BossTurretShooter : MonoBehaviour
     {
         if (playerTarget == null) return;
 
-        // 1. ÇÃ·¹ÀÌ¾î È¸Àü
+        // 1. í”Œë ˆì´ì–´ íšŒì „
         Vector3 toPlayer = playerTarget.position - transform.position;
         if (toPlayer.sqrMagnitude > 0.01f)
         {
@@ -63,7 +62,7 @@ public class BossTurretShooter : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, Time.deltaTime * rotationSpeed);
         }
 
-        // 2. ÄğÅ¸ÀÓ & »ç°Å¸® Ã¼Å© ÈÄ ÆĞÅÏº° ¹ß»ç
+        // 2. ì¿¨íƒ€ì„ & ì‚¬ê±°ë¦¬ ì²´í¬ í›„ íŒ¨í„´ë³„ ë°œì‚¬
         float dist = Vector3.Distance(transform.position, playerTarget.position);
         if (Time.time >= nextFireTime && dist <= fireRange)
         {
@@ -80,7 +79,7 @@ public class BossTurretShooter : MonoBehaviour
         }
     }
 
-    // ´ÜÀÏ ¹ß»ç ÆĞÅÏ
+    // ë‹¨ì¼ ë°œì‚¬ íŒ¨í„´
     void FireSingle()
     {
         foreach (Transform fp in singleFirePoints)
@@ -101,12 +100,16 @@ public class BossTurretShooter : MonoBehaviour
             dmgHandler.damageInterval = singleDamageInterval;
             dmgHandler.playerController = playerController;
 
+            // ğŸ’¡ íŒŒí‹°í´ ìë™ì •ë¦¬
+            var autoDestroy = psInstance.gameObject.AddComponent<AutoDestroyIfOwnerDead>();
+            autoDestroy.owner = this.gameObject;
+
             psInstance.Play();
             Destroy(psInstance.gameObject, singleParticleDuration + psInstance.main.startLifetime.constantMax);
         }
     }
 
-    // ¸ÖÆ¼¼¦ ÆĞÅÏ
+    // ë©€í‹°ìƒ· íŒ¨í„´
     void FireMulti()
     {
         foreach (Transform fp in multiFirePoints)
@@ -127,20 +130,24 @@ public class BossTurretShooter : MonoBehaviour
             dmgHandler.damageInterval = multiDamageInterval;
             dmgHandler.playerController = playerController;
 
+            // ğŸ’¡ íŒŒí‹°í´ ìë™ì •ë¦¬
+            var autoDestroy = psInstance.gameObject.AddComponent<AutoDestroyIfOwnerDead>();
+            autoDestroy.owner = this.gameObject;
+
             psInstance.Play();
             Destroy(psInstance.gameObject, multiParticleDuration + psInstance.main.startLifetime.constantMax);
         }
     }
 
-    // ¿ÜºÎ(ÄÚµå µî)¿¡¼­ ÆĞÅÏ ÀüÈ¯ °¡´É
+    // ì™¸ë¶€(ì½”ë“œ ë“±)ì—ì„œ íŒ¨í„´ ì „í™˜ ê°€ëŠ¥
     public void SetPattern(int idx)
     {
         currentPattern = (AttackPattern)idx;
         lastPatternIdx = idx;
-        nextFireTime = 0; // ÆĞÅÏ º¯°æ ½Ã ¹Ù·Î ¹ß»ç °¡´ÉÇÏµµ·Ï ÄğÅ¸ÀÓ ¸®¼Â
+        nextFireTime = 0; // íŒ¨í„´ ë³€ê²½ ì‹œ ë°”ë¡œ ë°œì‚¬ ê°€ëŠ¥í•˜ë„ë¡ ì¿¨íƒ€ì„ ë¦¬ì…‹
     }
 
-    // ÆĞÅÏÀ» ÀÏÁ¤ ÁÖ±â¸¶´Ù "¿¬¼Ó Áßº¹ ¾øÀÌ" ·£´ı º¯°æ
+    // íŒ¨í„´ì„ ì¼ì • ì£¼ê¸°ë§ˆë‹¤ "ì—°ì† ì¤‘ë³µ ì—†ì´" ëœë¤ ë³€ê²½
     IEnumerator PatternRoutine()
     {
         while (true)
@@ -148,7 +155,7 @@ public class BossTurretShooter : MonoBehaviour
             int patternCount = System.Enum.GetValues(typeof(AttackPattern)).Length;
             int randomIdx;
 
-            // ÀÌÀü ÆĞÅÏ°ú ´Ù¸¦ ¶§±îÁö ·£´ı
+            // ì´ì „ íŒ¨í„´ê³¼ ë‹¤ë¥¼ ë•Œê¹Œì§€ ëœë¤
             do
             {
                 randomIdx = Random.Range(0, patternCount);
