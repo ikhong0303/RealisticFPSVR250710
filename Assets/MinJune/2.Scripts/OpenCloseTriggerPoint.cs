@@ -6,7 +6,7 @@ using UnityEngine;
 public class DoorUnit
 {
     public Transform door;
-    public Vector3 targetPosition;
+    public Transform targetPosition;
     public float moveSpeed = 2f;
 
     [HideInInspector] public Vector3 closedPosition;
@@ -105,7 +105,7 @@ public class OpenCloseTriggerPoint : MonoBehaviour
             {
                 var d = doors[i];
                 if (d.door != null)
-                    StartCoroutine(MoveDoor(d.door, d.door.position, d.targetPosition, d.moveSpeed));
+                    StartCoroutine(MoveDoor(d.door, d.door.position, d.targetPosition.position, d.moveSpeed));
             }
             yield break;
         }
@@ -114,15 +114,15 @@ public class OpenCloseTriggerPoint : MonoBehaviour
         bool finished0 = false;
         bool finished1 = false;
 
-        StartCoroutine(MoveDoorWithFlag(doors[0].door, doors[0].door.position, doors[0].targetPosition, doors[0].moveSpeed, () => finished0 = true));
-        StartCoroutine(MoveDoorWithFlag(doors[1].door, doors[1].door.position, doors[1].targetPosition, doors[1].moveSpeed, () => finished1 = true));
+        StartCoroutine(MoveDoorWithFlag(doors[0].door, doors[0].door.position, doors[0].targetPosition.position, doors[0].moveSpeed, () => finished0 = true));
+        StartCoroutine(MoveDoorWithFlag(doors[1].door, doors[1].door.position, doors[1].targetPosition.position, doors[1].moveSpeed, () => finished1 = true));
 
         // 두 문이 모두 완료될 때까지 대기
         yield return new WaitUntil(() => finished0 && finished1);
 
         // 2번 문 열기 (GetComponent 없이 바로 DoorUnit 정보 사용!)
         if (doors[2].door != null)
-            yield return MoveDoor(doors[2].door, doors[2].door.position, doors[2].targetPosition, doors[2].moveSpeed);
+            yield return MoveDoor(doors[2].door, doors[2].door.position, doors[2].targetPosition.position, doors[2].moveSpeed);
     }
 
     // ------------------- 문 닫기 -------------------
