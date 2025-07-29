@@ -8,6 +8,7 @@ TagManager:
   - projectile
   - Weapon
   - MuzzleFx
+  - SpawnedNPC
   layers:
   - Default
   - TransparentFX

@@ -34,6 +34,13 @@ public class BossEventController : MonoBehaviour
     [Header("보스 사망 이펙트 (파티클)")]
     public GameObject deathEffectPrefab;
 
+    // -----------[여기서부터 추가]-----------
+    [Header("스폰된 오브젝트가 남아있는 동안 보스 무적")]
+    public bool blockDamageWhileSpawnedObjectsExist = true;
+    public string spawnedTag = "SpawnedNPC";  // 스폰되는 NPC가 가지는 태그 (Inspector에서 지정)
+    private bool isBlockingDamage = false;
+    // -------------------------------------
+
     private bool isDead = false;
 
     void Awake()
@@ -56,6 +63,14 @@ public class BossEventController : MonoBehaviour
 
     private void OnBossTakeDamage(float damage)
     {
+        // ----------[여기 추가]-----------
+        if (blockDamageWhileSpawnedObjectsExist && isBlockingDamage)
+        {
+            // Debug.Log("보스 무적 상태! 데미지 무시됨");
+            return;
+        }
+        // ------------------------------
+
         float curHp = GetCurrentHp();
 
         if (!npcSpawnerActivated && curHp <= npcSpawnerTriggerHP && curHp > 0f)
@@ -63,6 +78,14 @@ public class BossEventController : MonoBehaviour
             Debug.Log("보스 체력 트리거 이하 → 스포너 활성화");
             npcSpawnerActivated = true;
             SpawnAllSpawners();
+
+            // ---------------[여기 추가]---------------
+            if (blockDamageWhileSpawnedObjectsExist)
+            {
+                isBlockingDamage = true;
+                StartCoroutine(CheckSpawnedObjectsCoroutine());
+            }
+            // --------------------------------------
         }
 
         if (!isDead && Mathf.Approximately(curHp, 0f))
@@ -143,4 +166,22 @@ public class BossEventController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
+
+    // ----------------[여기 추가!]-------------------
+    private IEnumerator CheckSpawnedObjectsCoroutine()
+    {
+        // 최소 0.5초마다 체크 (부하 적게)
+        while (true)
+        {
+            var spawnedObjs = GameObject.FindGameObjectsWithTag(spawnedTag);
+            if (spawnedObjs.Length == 0)
+            {
+                isBlockingDamage = false;
+                // Debug.Log("스폰된 오브젝트 전부 파괴됨 → 보스 무적 해제");
+                break;
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+    // ---------------------------------------------
 }

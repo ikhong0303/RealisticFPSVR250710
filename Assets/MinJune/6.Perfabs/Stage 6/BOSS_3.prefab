@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1002081891312987509}
   m_Layer: 0
   m_Name: Cylinder.008
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 5808976618256908726}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 3121951224359230264}
   m_Layer: 0
   m_Name: Cylinder.006
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 1729283526861448305}
   m_Layer: 0
   m_Name: Sphere.009
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 345699821168494450}
   m_Layer: 0
   m_Name: Sphere.007
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 15959832160283495}
   m_Layer: 0
   m_Name: Plane.011
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 4829024407815931668}
   m_Layer: 0
   m_Name: Sphere.001
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 6875650699011926930}
   m_Layer: 0
   m_Name: Cylinder.002
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -701,7 +701,7 @@ GameObject:
   - component: {fileID: 5984832146530071873}
   m_Layer: 0
   m_Name: Cylinder.005
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -787,7 +787,7 @@ GameObject:
   - component: {fileID: 1953247784932504792}
   m_Layer: 0
   m_Name: Sphere.006
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -873,7 +873,7 @@ GameObject:
   - component: {fileID: 1729680495048726319}
   m_Layer: 0
   m_Name: Cube.004
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -959,7 +959,7 @@ GameObject:
   - component: {fileID: 5168793253083995671}
   m_Layer: 0
   m_Name: Cube.003
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1045,7 +1045,7 @@ GameObject:
   - component: {fileID: 1394738668630613788}
   m_Layer: 0
   m_Name: Cylinder.004
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1131,7 +1131,7 @@ GameObject:
   - component: {fileID: 895786804733551014}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1217,7 +1217,7 @@ GameObject:
   - component: {fileID: 6932403092835854803}
   m_Layer: 0
   m_Name: Sphere.005
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1303,7 +1303,7 @@ GameObject:
   - component: {fileID: 9069289601200938258}
   m_Layer: 0
   m_Name: Plane.009
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1389,9 +1389,10 @@ GameObject:
   - component: {fileID: 6965541309181093499}
   - component: {fileID: 1560236658232105033}
   - component: {fileID: -6496003938387282702}
+  - component: {fileID: 148136801066282662}
   m_Layer: 0
   m_Name: BOSS_3
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1516,6 +1517,21 @@ MonoBehaviour:
   npcSpawners: []
   spawnOnDeathList: []
   deathEffectPrefab: {fileID: 4363398808316426546, guid: 3068fa71ed3ced848a089161a8191dc1, type: 3}
+  blockDamageWhileSpawnedObjectsExist: 0
+  spawnedTag: SpawnedNPC
+--- !u!114 &148136801066282662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4588977940236880440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5b8a65227b2f246b9619ada505ecb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 4588977940236880440}
 --- !u!1 &4806115905943628031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1529,7 +1545,7 @@ GameObject:
   - component: {fileID: 7260565940088001043}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1615,7 +1631,7 @@ GameObject:
   - component: {fileID: 5859140851880665043}
   m_Layer: 0
   m_Name: Cylinder.001
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1701,7 +1717,7 @@ GameObject:
   - component: {fileID: 5042643531108421796}
   m_Layer: 0
   m_Name: Cube.002
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1787,7 +1803,7 @@ GameObject:
   - component: {fileID: 6877164529815188552}
   m_Layer: 0
   m_Name: Sphere.008
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1873,7 +1889,7 @@ GameObject:
   - component: {fileID: 6401405178166072696}
   m_Layer: 0
   m_Name: Cube.001
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1959,7 +1975,7 @@ GameObject:
   - component: {fileID: 4378340596044946640}
   m_Layer: 0
   m_Name: Cylinder.003
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2045,7 +2061,7 @@ GameObject:
   - component: {fileID: 8623148221714386871}
   m_Layer: 0
   m_Name: hitbox
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2114,7 +2130,7 @@ GameObject:
   - component: {fileID: 6161869231047048922}
   m_Layer: 0
   m_Name: Cube.005
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2198,7 +2214,7 @@ GameObject:
   - component: {fileID: 524485150754767174}
   m_Layer: 0
   m_Name: fire point
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2231,7 +2247,7 @@ GameObject:
   - component: {fileID: 7901724483702272459}
   m_Layer: 0
   m_Name: Sphere.002
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2317,7 +2333,7 @@ GameObject:
   - component: {fileID: 5352104401934580670}
   m_Layer: 0
   m_Name: Sphere.003
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2403,7 +2419,7 @@ GameObject:
   - component: {fileID: 6615473596243458601}
   m_Layer: 0
   m_Name: Sphere.004
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2489,7 +2505,7 @@ GameObject:
   - component: {fileID: 640844315463173932}
   m_Layer: 0
   m_Name: Cylinder.012
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2575,7 +2591,7 @@ GameObject:
   - component: {fileID: 4840284673161360986}
   m_Layer: 0
   m_Name: Cylinder.007
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2661,7 +2677,7 @@ GameObject:
   - component: {fileID: 5877919074710021096}
   m_Layer: 0
   m_Name: Plane.010
-  m_TagString: Untagged
+  m_TagString: SpawnedNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
