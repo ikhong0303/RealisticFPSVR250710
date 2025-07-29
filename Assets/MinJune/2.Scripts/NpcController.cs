@@ -81,7 +81,7 @@ public class NpcController : MonoBehaviour, IEnemy
     private void Patrol()
     {
         nav.speed = patrolSpeed;
-        if (!nav.hasPath && RandomPoint(transform.position, searchDistance, out Vector3 pt))
+        if ((!nav.hasPath || nav.remainingDistance <= 1.5f) && RandomPoint(transform.position, searchDistance, out Vector3 pt) )
             nav.SetDestination(pt);
     }
 
@@ -90,11 +90,13 @@ public class NpcController : MonoBehaviour, IEnemy
         nav.speed = chaseSpeed;
         float dist = Vector3.Distance(transform.position, playerCamera.position);
 
-        if (dist <= nav.stoppingDistance && Time.time >= nextMeleeTime)
+        if (dist <= nav.stoppingDistance + 1f )
         {
+            print($"attack : {dist}");
             nav.ResetPath();
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("punch") || anim.IsInTransition(0)) return;
             anim?.SetTrigger("attack");
-            nextMeleeTime = Time.time + meleeCooldown;
+            //nextMeleeTime = Time.time + meleeCooldown;
         }
         else
         {

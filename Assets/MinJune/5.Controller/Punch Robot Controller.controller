@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: punch
+    m_ConditionEvent: attack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8047345485124895021}
@@ -120,7 +120,7 @@ AnimatorController:
   m_Name: Punch Robot Controller
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: punch
+  - m_Name: attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
