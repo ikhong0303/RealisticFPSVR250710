@@ -1485,11 +1485,11 @@ MonoBehaviour:
   currentPattern: 0
   rotationSpeed: 5
   fireRange: 25
-  singleShotCooldown: 5
-  multiShotCooldown: 8
+  singleShotCooldown: 1
+  multiShotCooldown: 2
   singleFirePoints:
   - {fileID: 524485150754767174}
-  singleParticlePrefab: {fileID: 6594598162411061089, guid: fc8dd2d14b68cf9428edc56aacede5b4, type: 3}
+  singleParticlePrefab: {fileID: 6594598162411061089, guid: ddd18af843aa6844b88b63d921ef2cf1, type: 3}
   singleParticleDuration: 2
   singleDamage: 10
   singleDamageInterval: 1

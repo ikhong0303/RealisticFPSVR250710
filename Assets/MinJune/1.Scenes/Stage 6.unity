@@ -5516,7 +5516,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1673339878}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d5b8a65227b2f246b9619ada505ecb1, type: 3}
   m_Name: 
@@ -6922,6 +6922,14 @@ PrefabInstance:
     - target: {fileID: 898127405743568371, guid: c626fb95c67300142a9ada55149d770c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983195757732747437, guid: c626fb95c67300142a9ada55149d770c, type: 3}
+      propertyPath: multiShotCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983195757732747437, guid: c626fb95c67300142a9ada55149d770c, type: 3}
+      propertyPath: singleShotCooldown
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7444665507496402613, guid: c626fb95c67300142a9ada55149d770c, type: 3}
       propertyPath: npcSpawners.Array.data[0].spawnPoint
