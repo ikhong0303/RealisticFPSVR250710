@@ -2077,6 +2077,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2900402292619864846, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153640248242317951, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
+      propertyPath: m_Radius
+      value: 0.13
+      objectReference: {fileID: 0}
     - target: {fileID: 3678051351296404091, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
       propertyPath: m_TagString
       value: Player
@@ -2086,6 +2094,22 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3678051352368048512, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862897019311740644, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965969976568014997, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4561821767253062940, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832622847573173067, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -2133,7 +2157,19 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7310530544533075553, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7310530544577350339, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7310530544630126304, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7310530545246058142, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -2595,6 +2631,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563889812}
   m_Mesh: {fileID: 8385836491182413749, guid: 2d36cf196441dba4396a8e7069979492, type: 3}
+--- !u!1 &571046497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 571046498}
+  m_Layer: 0
+  m_Name: smoke
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &571046498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571046497}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.013057123, y: 0.098, z: 5.0806084}
+  m_LocalScale: {x: 0.4997062, y: 0.4997062, z: 0.4997062}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &573542160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4426,6 +4493,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168224462}
   m_Mesh: {fileID: -2477511411847689622, guid: 2d36cf196441dba4396a8e7069979492, type: 3}
+--- !u!1 &1173827356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1173827357}
+  m_Layer: 0
+  m_Name: smoke (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1173827357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173827356}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.077, y: 0.754, z: 4.562}
+  m_LocalScale: {x: 0.4997062, y: 0.4997062, z: 0.4997062}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1229286578
 GameObject:
   m_ObjectHideFlags: 0
@@ -5424,14 +5522,23 @@ MonoBehaviour:
   - door: {fileID: 688738963}
     targetPosition: {fileID: 1652255930}
     moveSpeed: 0.5
+    smokeParticlePrefab: {fileID: 7192686544852202956, guid: aaa171d64015b414086c71fcd7b47eee, type: 3}
+    smokeSpawnPoint: {fileID: 1173827357}
+    smokeParticleTiming: 0
     closedPosition: {x: 0, y: 0, z: 0}
   - door: {fileID: 263360737}
     targetPosition: {fileID: 1502620812}
     moveSpeed: 0.5
+    smokeParticlePrefab: {fileID: 7192686544852202956, guid: aaa171d64015b414086c71fcd7b47eee, type: 3}
+    smokeSpawnPoint: {fileID: 1173827357}
+    smokeParticleTiming: 0
     closedPosition: {x: 0, y: 0, z: 0}
   - door: {fileID: 2038847340}
     targetPosition: {fileID: 854321655}
     moveSpeed: 1
+    smokeParticlePrefab: {fileID: 7192686544852202956, guid: aaa171d64015b414086c71fcd7b47eee, type: 3}
+    smokeSpawnPoint: {fileID: 571046498}
+    smokeParticleTiming: 0
     closedPosition: {x: 0, y: 0, z: 0}
   defaultParticlePrefab: {fileID: 3489838597003798693, guid: 50c4422fd1c9808408ee095e38fb0576, type: 3}
   triggeredParticlePrefab: {fileID: 3489838597003798693, guid: b6530e1607d23154598e5bb2f7ca8152, type: 3}
@@ -8721,3 +8828,5 @@ SceneRoots:
   - {fileID: 1898043213}
   - {fileID: 1404365827}
   - {fileID: 1033229486}
+  - {fileID: 1173827357}
+  - {fileID: 571046498}

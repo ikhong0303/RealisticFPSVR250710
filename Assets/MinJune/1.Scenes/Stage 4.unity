@@ -2142,6 +2142,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1378968506556707602, guid: 91bfb576693897d4da661f4efa90dcf4, type: 3}
+--- !u!1 &118292974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 118292975}
+  m_Layer: 0
+  m_Name: smoke (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &118292975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118292974}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.077, y: 0.754, z: 4.562}
+  m_LocalScale: {x: 0.4997062, y: 0.4997062, z: 0.4997062}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &119753932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3011,14 +3042,23 @@ MonoBehaviour:
   - door: {fileID: 480015803}
     targetPosition: {fileID: 19200960}
     moveSpeed: 0.5
+    smokeParticlePrefab: {fileID: 7192686544852202956, guid: aaa171d64015b414086c71fcd7b47eee, type: 3}
+    smokeSpawnPoint: {fileID: 118292975}
+    smokeParticleTiming: 0
     closedPosition: {x: 0, y: 0, z: 0}
   - door: {fileID: 1303483601}
     targetPosition: {fileID: 980499415}
     moveSpeed: 0.5
+    smokeParticlePrefab: {fileID: 7192686544852202956, guid: aaa171d64015b414086c71fcd7b47eee, type: 3}
+    smokeSpawnPoint: {fileID: 118292975}
+    smokeParticleTiming: 0
     closedPosition: {x: 0, y: 0, z: 0}
   - door: {fileID: 1392114571}
     targetPosition: {fileID: 1487048551}
     moveSpeed: 1
+    smokeParticlePrefab: {fileID: 7192686544852202956, guid: aaa171d64015b414086c71fcd7b47eee, type: 3}
+    smokeSpawnPoint: {fileID: 1574718932}
+    smokeParticleTiming: 0
     closedPosition: {x: 0, y: 0, z: 0}
   defaultParticlePrefab: {fileID: 3489838597003798693, guid: 50c4422fd1c9808408ee095e38fb0576, type: 3}
   triggeredParticlePrefab: {fileID: 3489838597003798693, guid: b6530e1607d23154598e5bb2f7ca8152, type: 3}
@@ -7608,6 +7648,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3862897019311740644, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 5727277870542246131, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
       propertyPath: startingItem
       value: 
@@ -7704,6 +7748,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   maxHp: 100
+  healInterval: 1
+  healAmount: 5
 --- !u!114 &428583888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34345,6 +34391,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -718615928739361745, guid: 91bfb576693897d4da661f4efa90dcf4, type: 3}
+--- !u!1 &1574718931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1574718932}
+  m_Layer: 0
+  m_Name: smoke
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1574718932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574718931}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.013057123, y: 0.098, z: 5.0806084}
+  m_LocalScale: {x: 0.4997062, y: 0.4997062, z: 0.4997062}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1578931609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43718,3 +43795,5 @@ SceneRoots:
   - {fileID: 788546165}
   - {fileID: 164779847}
   - {fileID: 1676728694}
+  - {fileID: 118292975}
+  - {fileID: 1574718932}
