@@ -13342,7 +13342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 423733050}
-  portalPrefab: {fileID: 220946122420977632, guid: f0cbbe78ee5807244abbff1614cff413, type: 3}
+  portalPrefab: {fileID: 220946122420977632, guid: 9e28c1a1a7d507c498f517720e1b49b8, type: 3}
   portalSpawnPoint: {fileID: 555500659}
   enemyCount: 0
 --- !u!4 &2130359343

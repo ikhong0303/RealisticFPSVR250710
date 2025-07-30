@@ -1101,8 +1101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcMode: 0
-  patrolSpeed: 2
-  chaseSpeed: 4
+  patrolSpeed: 1
+  chaseSpeed: 2
   searchDistance: 10
   fieldOfViewAngle: 100
   meleeDamage: 1

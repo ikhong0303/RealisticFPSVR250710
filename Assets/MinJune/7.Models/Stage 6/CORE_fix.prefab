@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8544334247382962894}
   m_Layer: 0
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: EndingCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,9 +79,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: b135f4d6470d30a419f2c4ecde50aef8, type: 3}
+      propertyPath: m_TagString
+      value: EndingCube
+      objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: b135f4d6470d30a419f2c4ecde50aef8, type: 3}
+      propertyPath: m_TagString
+      value: EndingCube
+      objectReference: {fileID: 0}
+    - target: {fileID: -1018664272722485354, guid: b135f4d6470d30a419f2c4ecde50aef8, type: 3}
+      propertyPath: m_TagString
+      value: EndingCube
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: b135f4d6470d30a419f2c4ecde50aef8, type: 3}
+      propertyPath: m_TagString
+      value: EndingCube
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b135f4d6470d30a419f2c4ecde50aef8, type: 3}
       propertyPath: m_Name
       value: CORE_fix
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b135f4d6470d30a419f2c4ecde50aef8, type: 3}
+      propertyPath: m_TagString
+      value: EndingCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416272007918961125, guid: b135f4d6470d30a419f2c4ecde50aef8, type: 3}
+      propertyPath: m_TagString
+      value: EndingCube
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

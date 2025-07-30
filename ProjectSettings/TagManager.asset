@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - MuzzleFx
   - SpawnedNPC
+  - EndingCube
   layers:
   - Default
   - TransparentFX
