@@ -43,7 +43,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _ApertureSize: 1
-    - _FeatheringEffect: 0.466
+    - _FeatheringEffect: 0.422
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
