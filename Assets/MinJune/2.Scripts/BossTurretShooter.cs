@@ -4,7 +4,6 @@ using UnityEngine;
 public class BossTurretShooter : MonoBehaviour
 {
     public enum AttackPattern { SingleShot, MultiShot }
-
     [Header("패턴 선택 (코드/Inspector에서 변경 가능)")]
     public AttackPattern currentPattern = AttackPattern.SingleShot;
 
@@ -30,6 +29,10 @@ public class BossTurretShooter : MonoBehaviour
     public float multiParticleDuration = 1.2f;
     public int multiDamage = 5;
     public float multiDamageInterval = 0.4f;
+
+    [Header("사운드 효과음 이름 (AudioManager)")]
+    public string singleShotSFXName = "SingleShot"; // Inspector에서 지정
+    public string multiShotSFXName = "MultiShot";   // Inspector에서 지정
 
     public float minPatternDuration = 5f;
     public float maxPatternDuration = 10f;
@@ -89,6 +92,12 @@ public class BossTurretShooter : MonoBehaviour
             Quaternion lookRot = Quaternion.LookRotation(dir);
             var psInstance = Instantiate(singleParticlePrefab, fp.position, lookRot);
 
+            // 🔊 단일발사 사운드 (AudioManager에서 관리)
+            if (AudioManager.Instance != null && !string.IsNullOrEmpty(singleShotSFXName))
+            {
+                AudioManager.Instance.PlaySFX(singleShotSFXName, fp.position);
+            }
+
             var col = psInstance.collision;
             col.enabled = true;
             col.type = ParticleSystemCollisionType.World;
@@ -118,6 +127,12 @@ public class BossTurretShooter : MonoBehaviour
             Vector3 dir = (playerTarget.position - fp.position).normalized;
             Quaternion lookRot = Quaternion.LookRotation(dir);
             var psInstance = Instantiate(multiParticlePrefab, fp.position, lookRot);
+
+            // 🔊 멀티샷 사운드 (AudioManager에서 관리)
+            if (AudioManager.Instance != null && !string.IsNullOrEmpty(multiShotSFXName))
+            {
+                AudioManager.Instance.PlaySFX(multiShotSFXName, fp.position);
+            }
 
             var col = psInstance.collision;
             col.enabled = true;

@@ -540,6 +540,7 @@ MonoBehaviour:
     smokeParticlePrefab: {fileID: 7192686544852202956, guid: aaa171d64015b414086c71fcd7b47eee, type: 3}
     smokeSpawnPoint: {fileID: 1578463563}
     smokeParticleTiming: 0
+    doorOpenSFX: {fileID: 8300000, guid: 703542f6d0f08404bb7a8011a566eab7, type: 3}
     closedPosition: {x: 0, y: 0, z: 0}
   - door: {fileID: 4306643202594685504}
     targetPosition: {fileID: 1330267744}
@@ -547,6 +548,7 @@ MonoBehaviour:
     smokeParticlePrefab: {fileID: 7192686544852202956, guid: aaa171d64015b414086c71fcd7b47eee, type: 3}
     smokeSpawnPoint: {fileID: 1578463563}
     smokeParticleTiming: 0
+    doorOpenSFX: {fileID: 8300000, guid: 703542f6d0f08404bb7a8011a566eab7, type: 3}
     closedPosition: {x: 0, y: 0, z: 0}
   - door: {fileID: 6286393608507716709}
     targetPosition: {fileID: 1565280467}
@@ -554,10 +556,12 @@ MonoBehaviour:
     smokeParticlePrefab: {fileID: 7192686544852202956, guid: aaa171d64015b414086c71fcd7b47eee, type: 3}
     smokeSpawnPoint: {fileID: 1103361271}
     smokeParticleTiming: 0
+    doorOpenSFX: {fileID: 8300000, guid: 703542f6d0f08404bb7a8011a566eab7, type: 3}
     closedPosition: {x: 0, y: 0, z: 0}
   defaultParticlePrefab: {fileID: 3489838597003798693, guid: 50c4422fd1c9808408ee095e38fb0576, type: 3}
   triggeredParticlePrefab: {fileID: 3489838597003798693, guid: b6530e1607d23154598e5bb2f7ca8152, type: 3}
   particleSpawnPoint: {fileID: 644560586}
+  doorOpenSFXName: DoorOpen
 --- !u!136 &65191488
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6261,6 +6265,7 @@ MonoBehaviour:
   delayBetweenSpawns: 0.5
   npcSpawnDelayAfterEffectStart: 0.1
   playerTag: Player
+  nextSceneName: Stage 6
 --- !u!136 &799559979
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,31 +9,37 @@ public class DoorUnit
     public Transform targetPosition;
     public float moveSpeed = 2f;
 
-    [Header("�� ���� ���� ��ƼŬ")]
+    [Header("문 열림 연기 파티클")]
     public ParticleSystem smokeParticlePrefab;
     public Transform smokeSpawnPoint;
 
     public enum ParticleTiming { AtStart, AtMiddle, AtEnd }
-    [Tooltip("��ƼŬ�� ���� Ÿ�̹� ���� (����/�߰�/��)")]
+    [Tooltip("파티클이 나올 타이밍 선택 (시작/중간/끝)")]
     public ParticleTiming smokeParticleTiming = ParticleTiming.AtStart;
+
+    [Header("문 열림 사운드")]
+    public AudioClip doorOpenSFX; // 🔊 각 문별 효과음 커스터마이즈도 가능 (없으면 AudioManager 기본 사용)
 
     [HideInInspector] public Vector3 closedPosition;
 }
 
 public class OpenCloseTriggerPoint : MonoBehaviour
 {
-    [Header("��� ����")]
+    [Header("모드 설정")]
     public bool isOpenMode = true;
 
-    [Header("�� ����Ʈ")]
+    [Header("문 리스트")]
     public List<DoorUnit> doors = new List<DoorUnit>();
 
-    [Header("��ƼŬ ������")]
+    [Header("파티클 프리팹")]
     public ParticleSystem defaultParticlePrefab;
     public ParticleSystem triggeredParticlePrefab;
 
-    [Header("��ƼŬ ��ȯ ��ġ")]
+    [Header("파티클 소환 위치")]
     public Transform particleSpawnPoint;
+
+    [Header("문열림 기본 사운드 (AudioManager의 sfxNames에서 'DoorOpen'과 맞춰야 함)")]
+    public string doorOpenSFXName = "DoorOpen"; // 🔊 이 이름으로 AudioManager에서 호출
 
     private ParticleSystem currentParticle;
     private bool isTriggered = false;
@@ -80,9 +86,8 @@ public class OpenCloseTriggerPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
         if (!other.CompareTag("Player")) return;
-        Debug.Log("�ν�");
+        Debug.Log("인식");
         if (isTriggered) return;
         isTriggered = true;
         SpawnTriggeredParticle();
@@ -95,7 +100,7 @@ public class OpenCloseTriggerPoint : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        // �ƹ��͵� ����
+        // 아무것도 안함
     }
 
     IEnumerator OpenDoors()
@@ -106,18 +111,28 @@ public class OpenCloseTriggerPoint : MonoBehaviour
             {
                 var d = doors[i];
                 if (d.door != null)
+                {
+                    // 🔊 [추가] 문별 사운드 재생
+                    PlayDoorOpenSound(d);
                     StartCoroutine(MoveDoorWithSmoke(d.door, d.door.position, d.targetPosition.position, d.moveSpeed, d.smokeParticlePrefab, d.smokeSpawnPoint, d.smokeParticleTiming));
+                }
             }
             yield break;
         }
 
         bool finished0 = false, finished1 = false;
+        // 🔊 [추가] 0번, 1번 문 동시에 소리
+        PlayDoorOpenSound(doors[0]);
         StartCoroutine(MoveDoorWithSmokeAndFlag(doors[0], () => finished0 = true));
+        PlayDoorOpenSound(doors[1]);
         StartCoroutine(MoveDoorWithSmokeAndFlag(doors[1], () => finished1 = true));
         yield return new WaitUntil(() => finished0 && finished1);
 
         if (doors[2].door != null)
+        {
+            PlayDoorOpenSound(doors[2]);
             yield return MoveDoorWithSmoke(doors[2].door, doors[2].door.position, doors[2].targetPosition.position, doors[2].moveSpeed, doors[2].smokeParticlePrefab, doors[2].smokeSpawnPoint, doors[2].smokeParticleTiming);
+        }
     }
 
     IEnumerator CloseDoors()
@@ -142,14 +157,14 @@ public class OpenCloseTriggerPoint : MonoBehaviour
             yield return MoveDoor(doors[2].door, doors[2].door.position, doors[2].closedPosition, doors[2].moveSpeed);
     }
 
-    // ---------------------- �� �̵� + ��ƼŬ (flag) ----------------------
+    // ---------------------- 문 이동 + 파티클 (flag) ----------------------
     IEnumerator MoveDoorWithSmokeAndFlag(DoorUnit d, System.Action onFinished)
     {
         yield return MoveDoorWithSmoke(d.door, d.door.position, d.targetPosition.position, d.moveSpeed, d.smokeParticlePrefab, d.smokeSpawnPoint, d.smokeParticleTiming);
         onFinished?.Invoke();
     }
 
-    // ---------------------- ���� �� �̵� + ��ƼŬ ----------------------
+    // ---------------------- 실제 문 이동 + 파티클 ----------------------
     IEnumerator MoveDoorWithSmoke(Transform door, Vector3 from, Vector3 to, float speed, ParticleSystem smokeParticlePrefab, Transform smokeSpawnPoint, DoorUnit.ParticleTiming timing)
     {
         float dist = Vector3.Distance(from, to);
@@ -193,7 +208,7 @@ public class OpenCloseTriggerPoint : MonoBehaviour
         if (door)
             door.position = to;
 
-        // ���� AtEnd�ε� �������� �����ؼ��� ���� ��ƼŬ �ȳ������� ����
+        // 만약 AtEnd인데 마지막에 도착해서도 아직 파티클 안나왔으면 생성
         if (smokeParticlePrefab && !particleSpawned && timing == DoorUnit.ParticleTiming.AtEnd)
         {
             Transform spawnPoint = smokeSpawnPoint ? smokeSpawnPoint : door;
@@ -223,5 +238,22 @@ public class OpenCloseTriggerPoint : MonoBehaviour
         }
         if (door)
             door.position = to;
+    }
+
+    // 🔊 문 오픈 사운드 처리 (문별로 AudioClip 있으면 그거 사용, 아니면 AudioManager)
+    void PlayDoorOpenSound(DoorUnit d)
+    {
+        if (d.doorOpenSFX != null)
+        {
+            // 문별 오디오소스가 있다면 직접 재생 (필요하면 문에 AudioSource 붙여서 PlayOneShot 가능)
+            // 예: (없으면 AudioManager.Instance.PlaySFX 사용)
+            AudioSource.PlayClipAtPoint(d.doorOpenSFX, d.door.position, 1.0f);
+        }
+        else
+        {
+            // AudioManager에서 이름 기준으로 재생 (3D)
+            if (!string.IsNullOrEmpty(doorOpenSFXName))
+                AudioManager.Instance.PlaySFX(doorOpenSFXName, d.door.position);
+        }
     }
 }

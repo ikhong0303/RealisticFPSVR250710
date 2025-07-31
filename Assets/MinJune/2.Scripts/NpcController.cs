@@ -22,8 +22,15 @@ public class NpcController : MonoBehaviour, IEnemy
 
     [Header("죽음 이펙트")]
     public float deathDelay = 2f;
-    public ParticleSystem deathParticlePrefab; // 추가: 죽음 파티클 프리팹
-    private DissolveEffect dissolveEffect; // (선택사항)
+    public ParticleSystem deathParticlePrefab;
+    private DissolveEffect dissolveEffect;
+
+    [Header("사운드 이름 (AudioManager에서 관리)")]
+    public string walkSFXName = "EnemyWalk";    // 걷기(패트롤/체이스 공통)
+    public string deathSFXName = "EnemyDie";    // 죽음
+
+    private AudioSource moveAudioSource;
+    private NpcMode lastMoveSfxMode = NpcMode.Death; // 상태중복 방지
 
     private NavMeshAgent nav;
     private Animator anim;
@@ -39,6 +46,12 @@ public class NpcController : MonoBehaviour, IEnemy
         anim = GetComponentInChildren<Animator>();
         health = GetComponent<EnemyHealth>();
         dissolveEffect = GetComponentInChildren<DissolveEffect>();
+
+        // 걷기 사운드용 AudioSource 생성
+        moveAudioSource = gameObject.AddComponent<AudioSource>();
+        moveAudioSource.spatialBlend = 1f; // 3D
+        moveAudioSource.playOnAwake = false;
+        moveAudioSource.loop = true;
     }
 
     private void Start()
@@ -59,7 +72,11 @@ public class NpcController : MonoBehaviour, IEnemy
 
     private void Update()
     {
-        if (playerCamera == null || npcMode == NpcMode.Death) return;
+        if (playerCamera == null || npcMode == NpcMode.Death)
+        {
+            StopMoveSFX();
+            return;
+        }
 
         float dist = Vector3.Distance(transform.position, playerCamera.position);
         Vector3 dir = (playerCamera.position - transform.position).normalized;
@@ -70,18 +87,20 @@ public class NpcController : MonoBehaviour, IEnemy
         {
             npcMode = NpcMode.Chase;
             Chase(dir);
+            PlayMoveSFX(NpcMode.Chase);
         }
         else
         {
             npcMode = NpcMode.Patrol;
             Patrol();
+            PlayMoveSFX(NpcMode.Patrol);
         }
     }
 
     private void Patrol()
     {
         nav.speed = patrolSpeed;
-        if ((!nav.hasPath || nav.remainingDistance <= 1.5f) && RandomPoint(transform.position, searchDistance, out Vector3 pt) )
+        if ((!nav.hasPath || nav.remainingDistance <= 1.5f) && RandomPoint(transform.position, searchDistance, out Vector3 pt))
             nav.SetDestination(pt);
     }
 
@@ -90,13 +109,11 @@ public class NpcController : MonoBehaviour, IEnemy
         nav.speed = chaseSpeed;
         float dist = Vector3.Distance(transform.position, playerCamera.position);
 
-        if (dist <= nav.stoppingDistance + 1f )
+        if (dist <= nav.stoppingDistance + 1f)
         {
-            print($"attack : {dist}");
             nav.ResetPath();
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("punch") || anim.IsInTransition(0)) return;
             anim?.SetTrigger("attack");
-            //nextMeleeTime = Time.time + meleeCooldown;
         }
         else
         {
@@ -134,8 +151,30 @@ public class NpcController : MonoBehaviour, IEnemy
     }
 
     /// <summary>
-    /// IEnemy 구현: EnemyHealth 에서 호출됩니다.
+    /// 걷기(패트롤/체이스) 지속 사운드
     /// </summary>
+    void PlayMoveSFX(NpcMode thisMode)
+    {
+        if (AudioManager.Instance == null || string.IsNullOrEmpty(walkSFXName)) return;
+        if (lastMoveSfxMode == thisMode && moveAudioSource.isPlaying) return; // 같은 상태+재생중이면 무시
+
+        int idx = AudioManager.Instance.sfxNames.IndexOf(walkSFXName);
+        if (idx < 0 || idx >= AudioManager.Instance.sfxClips.Count) return;
+
+        AudioClip clip = AudioManager.Instance.sfxClips[idx];
+        moveAudioSource.clip = clip;
+        moveAudioSource.volume = AudioManager.Instance.sfxVolume;
+        moveAudioSource.Play();
+        lastMoveSfxMode = thisMode;
+    }
+
+    void StopMoveSFX()
+    {
+        if (moveAudioSource.isPlaying)
+            moveAudioSource.Stop();
+        lastMoveSfxMode = NpcMode.Death;
+    }
+
     public void Die()
     {
         npcMode = NpcMode.Death;
@@ -143,12 +182,18 @@ public class NpcController : MonoBehaviour, IEnemy
         anim?.SetTrigger("death");
 
         // 죽음 파티클 생성 및 재생
-        if (deathParticlePrefab != null) //
+        if (deathParticlePrefab != null)
         {
-            var particle = Instantiate(deathParticlePrefab, transform.position, Quaternion.identity); //
-            particle.Play(); //
-            Destroy(particle.gameObject, particle.main.duration); // 파티클 재생이 끝나면 제거
+            var particle = Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
+            particle.Play();
+            Destroy(particle.gameObject, particle.main.duration);
         }
+
+        // 죽음 효과음(단발)
+        if (AudioManager.Instance != null && !string.IsNullOrEmpty(deathSFXName))
+            AudioManager.Instance.PlaySFX(deathSFXName, transform.position);
+
+        StopMoveSFX();
 
         StartCoroutine(DeathRoutine());
     }

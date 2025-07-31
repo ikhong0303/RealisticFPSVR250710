@@ -1099,12 +1099,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchDistance: 25
-  fieldOfViewAngle: 180
+  fieldOfViewAngle: 1000
   patrolSpeed: 1
   firePoint: {fileID: 1549964135739396200}
   particlePrefab: {fileID: 8601865154892981423, guid: df76e36d51fde6a4282cb87a791e28d3, type: 3}
   particleDuration: 10
-  fireCooldown: 2
+  fireCooldown: 1
   damageAmount: 10
   damageInterval: 1
   rotationSpeed: 5

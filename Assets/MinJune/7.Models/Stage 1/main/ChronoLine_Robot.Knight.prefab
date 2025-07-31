@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6627212111124711492}
   - component: {fileID: 6340091357952625611}
+  - component: {fileID: 8361121810209828196}
   m_Layer: 0
   m_Name: punch
   m_TagString: Untagged
@@ -25,12 +26,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609443069132891614}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000476837, y: 0.08226733, z: -0.0000010132786, w: -0.99661034}
-  m_LocalPosition: {x: -0, y: 0.327, z: -0}
-  m_LocalScale: {x: 0.45166036, y: 0.4516603, z: 0.45165005}
+  m_LocalRotation: {x: 0.00000046193583, y: 0.08226736, z: -0.0000010784712, w: -0.9966103}
+  m_LocalPosition: {x: 0, y: 0.043295085, z: 0}
+  m_LocalScale: {x: 0.45166034, y: 0.45166034, z: 0.45165014}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5883182266071243675}
+  m_Father: {fileID: 7876346755515510945}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6340091357952625611
 CapsuleCollider:
@@ -55,6 +56,21 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8361121810209828196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609443069132891614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37272f20660a3b04f921b2add75de6c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitFxPrefab: {fileID: 1403868677262040501, guid: 634a90789dbc31548907ebebd448f9ff, type: 3}
+  power: 1
+  attackCooldown: 1
 --- !u!1 &820438635924821886
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,12 +998,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6803169544883306252, guid: 23eaf79b5d0473440ab6c315ea5cd654, type: 3}
       insertIndex: 0
       addedObject: {fileID: 3232980097843531258}
-    - targetCorrespondingSourceObject: {fileID: -1812909498023395591, guid: 23eaf79b5d0473440ab6c315ea5cd654, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6627212111124711492}
     - targetCorrespondingSourceObject: {fileID: 6502182839619065283, guid: 23eaf79b5d0473440ab6c315ea5cd654, type: 3}
       insertIndex: -1
       addedObject: {fileID: 585486631418954136}
+    - targetCorrespondingSourceObject: {fileID: 6502182839619065283, guid: 23eaf79b5d0473440ab6c315ea5cd654, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6627212111124711492}
     - targetCorrespondingSourceObject: {fileID: -3321919801592875672, guid: 23eaf79b5d0473440ab6c315ea5cd654, type: 3}
       insertIndex: 0
       addedObject: {fileID: 4371468179378417390}
@@ -1104,7 +1120,7 @@ MonoBehaviour:
   patrolSpeed: 1
   chaseSpeed: 2
   searchDistance: 10
-  fieldOfViewAngle: 100
+  fieldOfViewAngle: 1000
   meleeDamage: 1
   meleeCooldown: 1
   deathDelay: 2
@@ -1138,11 +1154,6 @@ MonoBehaviour:
 --- !u!4 &5056831120448902434 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8169382868667117632, guid: 23eaf79b5d0473440ab6c315ea5cd654, type: 3}
-  m_PrefabInstance: {fileID: 3995259612129387874}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5883182266071243675 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -1812909498023395591, guid: 23eaf79b5d0473440ab6c315ea5cd654, type: 3}
   m_PrefabInstance: {fileID: 3995259612129387874}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6147043702574210303 stripped

@@ -424,6 +424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5269141134863100078}
   - component: {fileID: 517731240652243204}
+  - component: {fileID: 1063672838070156156}
   m_Layer: 0
   m_Name: punch
   m_TagString: Untagged
@@ -469,6 +470,21 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1063672838070156156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6752746465543635824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37272f20660a3b04f921b2add75de6c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitFxPrefab: {fileID: 1403868677262040501, guid: 634a90789dbc31548907ebebd448f9ff, type: 3}
+  power: 1
+  attackCooldown: 1
 --- !u!1 &7410093525204504163
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,7 +1004,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

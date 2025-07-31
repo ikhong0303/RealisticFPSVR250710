@@ -34,12 +34,13 @@ public class BossEventController : MonoBehaviour
     [Header("보스 사망 이펙트 (파티클)")]
     public GameObject deathEffectPrefab;
 
-    // -----------[여기서부터 추가]-----------
+    [Header("보스 사망 사운드 이름 (AudioManager에서 관리)")]
+    public string deathSFXName = "BossDie"; // 원하는 효과음 이름 지정
+
     [Header("스폰된 오브젝트가 남아있는 동안 보스 무적")]
     public bool blockDamageWhileSpawnedObjectsExist = true;
     public string spawnedTag = "SpawnedNPC";  // 스폰되는 NPC가 가지는 태그 (Inspector에서 지정)
     private bool isBlockingDamage = false;
-    // -------------------------------------
 
     private bool isDead = false;
 
@@ -63,13 +64,10 @@ public class BossEventController : MonoBehaviour
 
     private void OnBossTakeDamage(float damage)
     {
-        // ----------[여기 추가]-----------
         if (blockDamageWhileSpawnedObjectsExist && isBlockingDamage)
         {
-            // Debug.Log("보스 무적 상태! 데미지 무시됨");
             return;
         }
-        // ------------------------------
 
         float curHp = GetCurrentHp();
 
@@ -79,13 +77,11 @@ public class BossEventController : MonoBehaviour
             npcSpawnerActivated = true;
             SpawnAllSpawners();
 
-            // ---------------[여기 추가]---------------
             if (blockDamageWhileSpawnedObjectsExist)
             {
                 isBlockingDamage = true;
                 StartCoroutine(CheckSpawnedObjectsCoroutine());
             }
-            // --------------------------------------
         }
 
         if (!isDead && Mathf.Approximately(curHp, 0f))
@@ -100,7 +96,11 @@ public class BossEventController : MonoBehaviour
                     Instantiate(entry.prefabToSpawn, entry.spawnPoint.position, entry.spawnPoint.rotation);
             }
 
-            // (2) 파티클 재생
+            // (2) 사망 사운드 재생 (이 줄 추가)
+            if (AudioManager.Instance != null && !string.IsNullOrEmpty(deathSFXName))
+                AudioManager.Instance.PlaySFX(deathSFXName, transform.position);
+
+            // (3) 파티클 재생
             if (deathEffectPrefab)
             {
                 Debug.Log("deathEffectPrefab 생성 시도");
@@ -118,7 +118,7 @@ public class BossEventController : MonoBehaviour
                 Destroy(effect, destroyDelay);
             }
 
-            // (3) 보스 제거 딜레이
+            // (4) 보스 제거 딜레이
             StartCoroutine(DelayedDestroy());
         }
     }
@@ -167,21 +167,17 @@ public class BossEventController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // ----------------[여기 추가!]-------------------
     private IEnumerator CheckSpawnedObjectsCoroutine()
     {
-        // 최소 0.5초마다 체크 (부하 적게)
         while (true)
         {
             var spawnedObjs = GameObject.FindGameObjectsWithTag(spawnedTag);
             if (spawnedObjs.Length == 0)
             {
                 isBlockingDamage = false;
-                // Debug.Log("스폰된 오브젝트 전부 파괴됨 → 보스 무적 해제");
                 break;
             }
             yield return new WaitForSeconds(0.5f);
         }
     }
-    // ---------------------------------------------
 }

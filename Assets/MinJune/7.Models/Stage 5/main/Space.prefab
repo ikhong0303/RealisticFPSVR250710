@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37272f20660a3b04f921b2add75de6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitFxPrefab: {fileID: 0}
+  hitFxPrefab: {fileID: 1403868677262040501, guid: 634a90789dbc31548907ebebd448f9ff, type: 3}
   power: 1
   attackCooldown: 1
 --- !u!1 &3716240455872844310
@@ -948,9 +948,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcMode: 0
   patrolSpeed: 1
-  chaseSpeed: 1
+  chaseSpeed: 2
   searchDistance: 20
-  fieldOfViewAngle: 360
+  fieldOfViewAngle: 1000
   meleeDamage: 1
   meleeCooldown: 0.1
   deathDelay: 2

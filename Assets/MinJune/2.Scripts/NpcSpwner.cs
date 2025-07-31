@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,20 +11,26 @@ public class NpcSpawner : MonoBehaviour
         public GameObject npcPrefab;
     }
 
-    [Header("½ºÆùÇÒ NPC ¹× À§Ä¡ Á¤º¸")]
+    [Header("ìŠ¤í°í•  NPC ë° ìœ„ì¹˜ ì •ë³´")]
     public List<SpawnEntry> spawnEntries;
 
-    [Header("µîÀå ÀÌÆåÆ®(ÆÄÆ¼Å¬) ÇÁ¸®ÆÕ")]
+    [Header("ë“±ì¥ ì´í™íŠ¸(íŒŒí‹°í´) í”„ë¦¬íŒ¹")]
     public GameObject spawnEffectPrefab;
 
-    [Header("½ºÆù ½Ã°£ Á¶Àı")]
+    [Header("ë“±ì¥ ì‚¬ìš´ë“œ ì´ë¦„ (AudioManagerì—ì„œ ê´€ë¦¬)")]
+    public string spawnSFXName = "EnemySpawn"; // ì›í•˜ëŠ” ì´ë¦„ìœ¼ë¡œ ë°”ê¿”ë„ ë¨
+
+    [Header("ìŠ¤í° ì‹œê°„ ì¡°ì ˆ")]
     public float delayBetweenSpawns = 0.5f;
     public float npcSpawnDelayAfterEffectStart = 0.1f;
 
-    [Header("ÇÃ·¹ÀÌ¾î ÅÂ±×")]
+    [Header("í”Œë ˆì´ì–´ íƒœê·¸")]
     public string playerTag = "Player";
 
     private bool hasSpawned = false;
+
+    [Header("ì´ ìŠ¤í…Œì´ì§€ì—ì„œ í¬íƒˆì´ ì´ë™í•  ë‹¤ìŒ ì”¬ ì´ë¦„")]
+    public string nextSceneName; // **Inspectorì—ì„œ ì…ë ¥**
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,6 +38,14 @@ public class NpcSpawner : MonoBehaviour
 
         if (other.CompareTag(playerTag))
         {
+            // ìŠ¤í° ì§ì „ enemyCountë¥¼ ë°˜ë“œì‹œ 0ìœ¼ë¡œ!
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.enemyCount = 0;
+                // â˜… ì´ ìŠ¤í…Œì´ì§€ì˜ ë‹¤ìŒ ì”¬ ì´ë¦„ì„ GameManagerì— ì „ë‹¬!
+                GameManager.instance.SetNextScene(nextSceneName);
+            }
+
             StartCoroutine(SpawnRoutine());
             hasSpawned = true;
         }
@@ -64,14 +78,19 @@ public class NpcSpawner : MonoBehaviour
         if (npcSpawnDelayAfterEffectStart > 0)
             yield return new WaitForSeconds(npcSpawnDelayAfterEffectStart);
 
-        // **¿©±â¼­ Àû Ä«¿îÆ® Áõ°¡!**
+        // ğŸ”Š [ì—¬ê¸° ì¶”ê°€] ì  ë“±ì¥ íš¨ê³¼ìŒ ì¬ìƒ
+        if (!string.IsNullOrEmpty(spawnSFXName) && AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(spawnSFXName, point.position);
+        }
+
         if (npcToSpawn != null)
         {
             GameObject npc = Instantiate(npcToSpawn, point.position, point.rotation);
             if (GameManager.instance != null)
             {
                 GameManager.instance.enemyCount++;
-                Debug.Log("Àû »ı¼º, ÇöÀç Àû ¼ö: " + GameManager.instance.enemyCount);
+                Debug.Log("ì  ìƒì„±, í˜„ì¬ ì  ìˆ˜: " + GameManager.instance.enemyCount);
             }
         }
 

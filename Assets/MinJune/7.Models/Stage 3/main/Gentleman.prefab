@@ -355,6 +355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2921544036906198865}
   - component: {fileID: 4608570843064829553}
+  - component: {fileID: 3464467511812325966}
   m_Layer: 0
   m_Name: punch
   m_TagString: Untagged
@@ -400,6 +401,21 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3464467511812325966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4598861089003581781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37272f20660a3b04f921b2add75de6c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitFxPrefab: {fileID: 1403868677262040501, guid: 634a90789dbc31548907ebebd448f9ff, type: 3}
+  power: 1
+  attackCooldown: 1
 --- !u!1 &5373643820931256234
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +952,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -957,10 +973,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcMode: 0
-  patrolSpeed: 2
-  chaseSpeed: 4
+  patrolSpeed: 1
+  chaseSpeed: 2
   searchDistance: 10
-  fieldOfViewAngle: 100
+  fieldOfViewAngle: 1000
   meleeDamage: 1
   meleeCooldown: 1
   deathDelay: 2
