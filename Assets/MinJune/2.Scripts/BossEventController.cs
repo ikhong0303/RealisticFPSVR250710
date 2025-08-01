@@ -1,18 +1,18 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using MikeNspired.XRIStarterKit;
 
 public class BossEventController : MonoBehaviour
 {
-    [Header("º¸½º Health ÄÄÆ÷³ÍÆ®")]
+    [Header("ë³´ìŠ¤ Health ì»´í¬ë„ŒíŠ¸")]
     public EnemyHealth bossHealth;
 
-    [Header("º¸½º Ã¼·ÂÀÌ ÀÌ °ª ÀÌÇÏ°¡ µÇ¸é ½ºÆ÷³Ê µîÀå")]
+    [Header("ë³´ìŠ¤ ì²´ë ¥ì´ ì´ ê°’ ì´í•˜ê°€ ë˜ë©´ ìŠ¤í¬ë„ˆ ë“±ì¥")]
     public float npcSpawnerTriggerHP = 30f;
     private bool npcSpawnerActivated = false;
 
-    [Header("Npc Spawner ¸®½ºÆ® (¿©·¯°³ µîÀå °¡´É)")]
+    [Header("Npc Spawner ë¦¬ìŠ¤íŠ¸ (ì—¬ëŸ¬ê°œ ë“±ì¥ ê°€ëŠ¥)")]
     public List<NpcSpawnerEntry> npcSpawners = new List<NpcSpawnerEntry>();
     [System.Serializable]
     public class NpcSpawnerEntry
@@ -22,7 +22,7 @@ public class BossEventController : MonoBehaviour
         public GameObject spawnEffectPrefab;
     }
 
-    [Header("º¸½º »ç¸Á½Ã ¼ÒÈ¯ ÇÁ¸®ÆÕ ¸®½ºÆ® (¿©·¯°³ °¡´É)")]
+    [Header("ë³´ìŠ¤ ì‚¬ë§ì‹œ ì†Œí™˜ í”„ë¦¬íŒ¹ ë¦¬ìŠ¤íŠ¸ (ì—¬ëŸ¬ê°œ ê°€ëŠ¥)")]
     public List<SpawnOnDeathEntry> spawnOnDeathList = new List<SpawnOnDeathEntry>();
     [System.Serializable]
     public class SpawnOnDeathEntry
@@ -31,15 +31,15 @@ public class BossEventController : MonoBehaviour
         public Transform spawnPoint;
     }
 
-    [Header("º¸½º »ç¸Á ÀÌÆåÆ® (ÆÄÆ¼Å¬)")]
+    [Header("ë³´ìŠ¤ ì‚¬ë§ ì´í™íŠ¸ (íŒŒí‹°í´)")]
     public GameObject deathEffectPrefab;
 
-    [Header("º¸½º »ç¸Á »ç¿îµå ÀÌ¸§ (AudioManager¿¡¼­ °ü¸®)")]
-    public string deathSFXName = "BossDie"; // ¿øÇÏ´Â È¿°úÀ½ ÀÌ¸§ ÁöÁ¤
+    [Header("ë³´ìŠ¤ ì‚¬ë§ ì‚¬ìš´ë“œ ì´ë¦„ (AudioManagerì—ì„œ ê´€ë¦¬)")]
+    public string deathSFXName = "BossDie";
 
-    [Header("½ºÆùµÈ ¿ÀºêÁ§Æ®°¡ ³²¾ÆÀÖ´Â µ¿¾È º¸½º ¹«Àû")]
+    [Header("ìŠ¤í°ëœ ì˜¤ë¸Œì íŠ¸ê°€ ë‚¨ì•„ìˆëŠ” ë™ì•ˆ ë³´ìŠ¤ ë¬´ì ")]
     public bool blockDamageWhileSpawnedObjectsExist = true;
-    public string spawnedTag = "SpawnedNPC";  // ½ºÆùµÇ´Â NPC°¡ °¡Áö´Â ÅÂ±× (Inspector¿¡¼­ ÁöÁ¤)
+    public string spawnedTag = "SpawnedNPC";
     private bool isBlockingDamage = false;
 
     private bool isDead = false;
@@ -73,9 +73,9 @@ public class BossEventController : MonoBehaviour
 
         if (!npcSpawnerActivated && curHp <= npcSpawnerTriggerHP && curHp > 0f)
         {
-            Debug.Log("º¸½º Ã¼·Â Æ®¸®°Å ÀÌÇÏ ¡æ ½ºÆ÷³Ê È°¼ºÈ­");
+            Debug.Log("ë³´ìŠ¤ ì²´ë ¥ íŠ¸ë¦¬ê±° ì´í•˜ â†’ ìŠ¤í¬ë„ˆ í™œì„±í™”");
             npcSpawnerActivated = true;
-            SpawnAllSpawners();
+            StartCoroutine(SpawnAllSpawnersCoroutine());  // â˜… ì½”ë£¨í‹´ í˜¸ì¶œ!
 
             if (blockDamageWhileSpawnedObjectsExist)
             {
@@ -86,25 +86,24 @@ public class BossEventController : MonoBehaviour
 
         if (!isDead && Mathf.Approximately(curHp, 0f))
         {
-            Debug.Log("º¸½º Ã¼·Â 0 ÀÌÇÏ ¡æ »ç¸Á Ã³¸® ½ÃÀÛ");
+            Debug.Log("ë³´ìŠ¤ ì²´ë ¥ 0 ì´í•˜ â†’ ì‚¬ë§ ì²˜ë¦¬ ì‹œì‘");
             isDead = true;
 
-            // (1) ¾ÆÀÌÅÛ µå·Ó
+            // (1) ì•„ì´í…œ ë“œë¡­
             foreach (var entry in spawnOnDeathList)
             {
                 if (entry.prefabToSpawn && entry.spawnPoint)
                     Instantiate(entry.prefabToSpawn, entry.spawnPoint.position, entry.spawnPoint.rotation);
             }
 
-            // (2) »ç¸Á »ç¿îµå Àç»ı (ÀÌ ÁÙ Ãß°¡)
+            // (2) ì‚¬ë§ ì‚¬ìš´ë“œ ì¬ìƒ
             if (AudioManager.Instance != null && !string.IsNullOrEmpty(deathSFXName))
                 AudioManager.Instance.PlaySFX(deathSFXName, transform.position);
 
-            // (3) ÆÄÆ¼Å¬ Àç»ı
+            // (3) íŒŒí‹°í´ ì¬ìƒ
             if (deathEffectPrefab)
             {
-                Debug.Log("deathEffectPrefab »ı¼º ½Ãµµ");
-
+                Debug.Log("deathEffectPrefab ìƒì„± ì‹œë„");
                 Vector3 effectPos = transform.position + Vector3.up * 1f;
                 GameObject effect = Instantiate(deathEffectPrefab, effectPos, Quaternion.identity);
 
@@ -118,35 +117,44 @@ public class BossEventController : MonoBehaviour
                 Destroy(effect, destroyDelay);
             }
 
-            // (4) º¸½º Á¦°Å µô·¹ÀÌ
+            // (4) ë³´ìŠ¤ ì œê±° ë”œë ˆì´
             StartCoroutine(DelayedDestroy());
         }
     }
 
-    private void SpawnAllSpawners()
+    // â­ï¸â˜… í•µì‹¬ ì½”ë£¨í‹´! (íŒŒí‹°í´ â†’ ëŒ€ê¸° â†’ NPC ì†Œí™˜ â†’ íŒŒí‹°í´ ì‚­ì œ)
+    private IEnumerator SpawnAllSpawnersCoroutine()
     {
         foreach (var entry in npcSpawners)
         {
+            GameObject fx = null;
+            float maxDuration = 0.5f;
+
+            // (1) íŒŒí‹°í´ ì†Œí™˜ ë° ì‹œê°„ ê³„ì‚°
+            if (entry.spawnEffectPrefab && entry.spawnPoint)
+            {
+                fx = Instantiate(entry.spawnEffectPrefab, entry.spawnPoint.position, entry.spawnPoint.rotation);
+                var allParticles = fx.GetComponentsInChildren<ParticleSystem>();
+                foreach (var ps in allParticles)
+                {
+                    float duration = ps.main.duration + ps.main.startLifetime.constantMax;
+                    if (duration > maxDuration) maxDuration = duration;
+                }
+            }
+
+            // (2) íŒŒí‹°í´ ì‹œê°„ë§Œí¼ ëŒ€ê¸°
+            yield return new WaitForSeconds(maxDuration);
+
+            // (3) NPC ìŠ¤í°
             if (entry.npcSpawnerPrefab && entry.spawnPoint)
             {
                 Instantiate(entry.npcSpawnerPrefab, entry.spawnPoint.position, entry.spawnPoint.rotation);
+            }
 
-                if (entry.spawnEffectPrefab)
-                {
-                    GameObject fx = Instantiate(entry.spawnEffectPrefab, entry.spawnPoint.position, entry.spawnPoint.rotation);
-
-                    // ¸ğµç ParticleSystem¿¡¼­ ÃÖ´ë Àç»ı ½Ã°£ ±¸ÇÔ
-                    float maxDuration = 0f;
-                    var allParticles = fx.GetComponentsInChildren<ParticleSystem>();
-                    foreach (var ps in allParticles)
-                    {
-                        float duration = ps.main.duration + ps.main.startLifetime.constantMax;
-                        if (duration > maxDuration) maxDuration = duration;
-                    }
-                    if (maxDuration < 0.5f) maxDuration = 5f; // fallback
-
-                    Destroy(fx, maxDuration);
-                }
+            // (4) íŒŒí‹°í´ ìì—° ì‚­ì œ
+            if (fx)
+            {
+                Destroy(fx, 1f); // í˜¹ì‹œ ë‚¨ì•„ìˆì„ ë•Œë¥¼ ëŒ€ë¹„
             }
         }
     }

@@ -1390,6 +1390,7 @@ GameObject:
   - component: {fileID: 1560236658232105033}
   - component: {fileID: -6496003938387282702}
   - component: {fileID: 148136801066282662}
+  - component: {fileID: 3525050658520826241}
   m_Layer: 0
   m_Name: BOSS_3
   m_TagString: SpawnedNPC
@@ -1498,6 +1499,8 @@ MonoBehaviour:
   multiParticleDuration: 1.2
   multiDamage: 5
   multiDamageInterval: 0.4
+  singleShotSFXName: SingleShot
+  multiShotSFXName: MultiShot
   minPatternDuration: 5
   maxPatternDuration: 5
 --- !u!114 &-6496003938387282702
@@ -1517,6 +1520,7 @@ MonoBehaviour:
   npcSpawners: []
   spawnOnDeathList: []
   deathEffectPrefab: {fileID: 4363398808316426546, guid: 3068fa71ed3ced848a089161a8191dc1, type: 3}
+  deathSFXName: BossDie
   blockDamageWhileSpawnedObjectsExist: 0
   spawnedTag: SpawnedNPC
 --- !u!114 &148136801066282662
@@ -1532,6 +1536,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 4588977940236880440}
+--- !u!114 &3525050658520826241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4588977940236880440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b9aa4c9e6354741ac8cf24b33143ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatRadius: 2
+  floatSpeed: 1
 --- !u!1 &4806115905943628031
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _FRESNEL
   - _SURFACE_TYPE_TRANSPARENT
   - _USEALPHAOVERRIDE
   m_InvalidKeywords:
@@ -143,14 +144,14 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 0
     - _ExposureWeight: 0
-    - _FRESNEL: 0
+    - _FRESNEL: 1
     - _Fresnel: 0
     - _FresnelPower: 1
     - _FresnelScale: 1
     - _Intensity: 0
     - _MetallicScale: 1
-    - _MiddlePointPos: 0.5
-    - _MiddlePointPos1: 0.5
+    - _MiddlePointPos: 0.99
+    - _MiddlePointPos1: 0.99
     - _MultiplyNoiseDesaturation: 1
     - _NormalScale: 1
     - _OcclusionScale: 0
@@ -205,7 +206,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _AlphaOverrideChannel: {r: 1, g: 0, b: 0, a: 0}
+    - _AlphaOverrideChannel: {r: 1, g: 100, b: 0, a: 100}
     - _AlphaOverridePanning: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColorTint: {r: 1, g: 1, b: 1, a: 0}
     - _DetailAdditiveChannel: {r: 0, g: 0, b: 0, a: 0}
@@ -219,7 +220,7 @@ Material:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveTint: {r: 1, g: 1, b: 1, a: 1}
     - _FlipbooksColumsRows: {r: 1, g: 1, b: 0, a: 0}
-    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FresnelColor: {r: 0.045385063, g: 3.207217, b: 2.4717517, a: 1}
     - _LastColor: {r: 1, g: 0, b: 0, a: 0}
     - _MainAlphaChannel: {r: 1, g: 0, b: 0, a: 0}
     - _MainAlphaPanning: {r: 0, g: 0, b: 0, a: 0}
