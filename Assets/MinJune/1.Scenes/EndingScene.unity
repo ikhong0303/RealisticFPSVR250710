@@ -30299,7 +30299,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Thank You For This Game\n\n\n\uC7AC\uBC0C\uC5C8\uC9C0?"
+  m_text: "Thank You For Playing!\n\n\n\uC7AC\uBC0C\uC5C8\uC9C0?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7616aa409b3bc2646aa040bdebe80344, type: 2}
   m_sharedMaterial: {fileID: -4565375532768343701, guid: 7616aa409b3bc2646aa040bdebe80344, type: 2}
