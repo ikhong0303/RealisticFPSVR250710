@@ -1538,7 +1538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 423733050}
-  portalPrefab: {fileID: 0}
+  portalPrefab: {fileID: 220946122420977632, guid: f0cbbe78ee5807244abbff1614cff413, type: 3}
   portalSpawnPoint: {fileID: 0}
   enemyCount: 0
   portalSpawnSFXName: PortalSpawn
