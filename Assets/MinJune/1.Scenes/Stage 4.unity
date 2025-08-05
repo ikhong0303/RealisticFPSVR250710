@@ -8437,7 +8437,7 @@ PrefabInstance:
     - target: {fileID: 6197792196484601936, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
       propertyPath: startingItem
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4244157112350501198, guid: 29ef7eff76d766747a1f23be0a0c5e5e, type: 3}
     - target: {fileID: 6197792196657771704, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -21679,6 +21679,10 @@ PrefabInstance:
     - target: {fileID: 8429981633443581377, guid: 6c8af5c8012f01440af6cb2bc3eb987c, type: 3}
       propertyPath: m_Name
       value: TunnelingVignette
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429981633443581377, guid: 6c8af5c8012f01440af6cb2bc3eb987c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8429981633443581380, guid: 6c8af5c8012f01440af6cb2bc3eb987c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -43643,8 +43647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57babca242815d46904586ce38b82bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneType: 0
-  eraBGMIndex: 11
+  zoneType: 1
+  eraBGMIndex: 10
   playerTag: Player
 --- !u!136 &1846898606
 CapsuleCollider:

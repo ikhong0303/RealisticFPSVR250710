@@ -1354,7 +1354,7 @@ MonoBehaviour:
   delayBetweenSpawns: 0.5
   npcSpawnDelayAfterEffectStart: 0.1
   playerTag: Player
-  nextSceneName: Stage4
+  nextSceneName: Stage 4
 --- !u!136 &173733780
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1386,12 +1386,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173733778}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.46, z: 11.57}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0.22, y: 1.35, z: 19.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 837222975}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &179714337
 GameObject:
@@ -2853,8 +2853,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57babca242815d46904586ce38b82bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneType: 0
-  eraBGMIndex: 10
+  zoneType: 1
+  eraBGMIndex: 9
   playerTag: Player
 --- !u!136 &259106928
 CapsuleCollider:
@@ -3980,7 +3980,7 @@ PrefabInstance:
     - target: {fileID: 6197792196484601936, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
       propertyPath: startingItem
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3261327575039704335, guid: 8527509091439564ba9d50299c72f7d1, type: 3}
     - target: {fileID: 6197792196657771704, guid: 31324bb751cdf8946ad9f5f04221b57f, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -5832,6 +5832,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelingVignette
       objectReference: {fileID: 0}
+    - target: {fileID: 8429981633443581377, guid: 6c8af5c8012f01440af6cb2bc3eb987c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8429981633443581380, guid: 6c8af5c8012f01440af6cb2bc3eb987c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -6434,7 +6438,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f21f940df3bf7443931f936ca55f7ff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 173733781}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f21f940df3bf7443931f936ca55f7ff, type: 3}
       insertIndex: -1
@@ -6758,6 +6765,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5662349482028949111, guid: 7f21f940df3bf7443931f936ca55f7ff, type: 3}
+--- !u!4 &837222975 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f21f940df3bf7443931f936ca55f7ff, type: 3}
+  m_PrefabInstance: {fileID: 835891599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &857670057
 GameObject:
   m_ObjectHideFlags: 0
@@ -14888,7 +14900,6 @@ SceneRoots:
   - {fileID: 2130359343}
   - {fileID: 171199681}
   - {fileID: 835891599}
-  - {fileID: 173733781}
   - {fileID: 875774575}
   - {fileID: 2109178426}
   - {fileID: 1165546193}
