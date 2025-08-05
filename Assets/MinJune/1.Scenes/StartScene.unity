@@ -320,8 +320,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6f83c870c2548f749a062f3b01a49c70, type: 3}
   - {fileID: 8300000, guid: 84ad0670ac0a87f4f8a1e003925e9324, type: 3}
   - {fileID: 8300000, guid: 3e3e33e3ba57d8a4bb7db1d75d9f355c, type: 3}
-  - {fileID: 8300000, guid: 851af515774ec7a47bc2529558a6dac8, type: 3}
-  - {fileID: 8300000, guid: 934da797064b1454ebe36c7ef45761c6, type: 3}
+  - {fileID: 8300000, guid: 31bd80364c6c69d4b814732f7183f04b, type: 3}
+  - {fileID: 8300000, guid: 782d0c5883c365a48963b8f6646de1f8, type: 3}
   sfxNames:
   - EnemySpawn
   - EnemyWalk
